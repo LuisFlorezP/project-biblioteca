@@ -15,7 +15,7 @@ public class EditorialRestController {
     @Autowired
     private EditorialService editorialService;
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<Editorial>> getAllEditorials() {
         return ResponseEntity.ok(editorialService.getAllEditorial());
     }
@@ -29,7 +29,7 @@ public class EditorialRestController {
         return ResponseEntity.ok(editorial);
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Editorial> saveEditorial(@RequestBody Editorial editorial) {
         return ResponseEntity.ok(editorialService.saveEditorial(editorial));
     }
