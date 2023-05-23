@@ -2,19 +2,17 @@ package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.services.EditorialService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/editorials")
 public class EditorialRestController {
 
+    @Autowired
     private EditorialService editorialService;
 
     @GetMapping("")
