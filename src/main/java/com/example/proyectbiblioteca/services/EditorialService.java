@@ -22,8 +22,17 @@ public class EditorialService {
         return editorialRepository.findById(id);
     }
 
-    public Editorial saveEditorial(Editorial editorial) {
-        return editorialRepository.save(editorial);
+    public Optional<Editorial> saveEditorial(Editorial editorial) {
+        if (editorialRepository.findByNombre(editorial.getNombre()).isPresent()) {
+            return Optional.empty();
+        }
+        if (editorial.getNombre().length() < 2 || editorial.getNombre().length() > 30) {
+            return Optional.empty();
+        }
+        if (editorial.getDescripcion().length() > 300) {
+            return Optional.empty();
+        }
+        return Optional.of(editorialRepository.save(editorial));
     }
 
     public Editorial updateEditorial(Editorial editorial, Long id) {
