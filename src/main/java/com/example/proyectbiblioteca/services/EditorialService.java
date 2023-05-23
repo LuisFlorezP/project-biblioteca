@@ -2,14 +2,16 @@ package com.example.proyectbiblioteca.services;
 
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.repositories.EditorialRepository;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
+@Service
 public class EditorialService {
 
+    @Autowired
     private EditorialRepository editorialRepository;
 
     public List<Editorial> getAllEditorial() {
