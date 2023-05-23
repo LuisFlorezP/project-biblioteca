@@ -12,10 +12,13 @@ import org.springframework.validation.annotation.Validated;
 @ToString
 @Entity
 @Validated
-@Table(name = "editorial")
+@Table(name = "editorialEntity")
 public class Editorial {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     @Column(name = "nombre", nullable = false, length = 30, unique = true)
     @Size(min = 2, max = 30)
     private String nombre;

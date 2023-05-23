@@ -21,7 +21,7 @@ public class EditorialRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Editorial>> getEditorial(@PathVariable String id) {
+    public ResponseEntity<Optional<Editorial>> getEditorial(@PathVariable Long id) {
         Optional<Editorial> editorial = editorialService.getEditorial(id);
         if (editorial.equals(Optional.empty())) {
             return ResponseEntity.notFound().build();
@@ -35,7 +35,7 @@ public class EditorialRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Editorial> updateEditorial(@RequestBody Editorial editorial, @PathVariable String id) {
+    public ResponseEntity<Editorial> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
         Editorial data = editorialService.updateEditorial(editorial, id);
         if (data != null) {
             return ResponseEntity.ok(data);
@@ -44,7 +44,7 @@ public class EditorialRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Editorial> deleteEditorial(@PathVariable String id) {
+    public ResponseEntity<Editorial> deleteEditorial(@PathVariable Long id) {
         if (editorialService.deleteEditorial(id)) {
             return ResponseEntity.noContent().build();
         }

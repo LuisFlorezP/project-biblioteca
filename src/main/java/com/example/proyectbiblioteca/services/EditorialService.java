@@ -18,16 +18,16 @@ public class EditorialService {
         return editorialRepository.findAll();
     }
 
-    public Optional<Editorial> getEditorial(String nombre) {
-        return editorialRepository.findById(nombre);
+    public Optional<Editorial> getEditorial(Long id) {
+        return editorialRepository.findById(id);
     }
 
     public Editorial saveEditorial(Editorial editorial) {
         return editorialRepository.save(editorial);
     }
 
-    public Editorial updateEditorial(Editorial editorial, String nombre) {
-        return  editorialRepository.findById(nombre)
+    public Editorial updateEditorial(Editorial editorial, Long id) {
+        return  editorialRepository.findById(id)
                 .map(
                     data -> {
                         data.setNombre(editorial.getNombre());
@@ -37,11 +37,11 @@ public class EditorialService {
                 ).orElse(null);
     }
 
-    public boolean deleteEditorial(String nombre) {
-        if (editorialRepository.findById(nombre).equals(Optional.empty())) {
+    public boolean deleteEditorial(Long id) {
+        if (editorialRepository.findById(id).equals(Optional.empty())) {
             return false;
         }
-        editorialRepository.deleteById(nombre);
+        editorialRepository.deleteById(id);
         return true;
     }
 }
