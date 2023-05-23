@@ -30,8 +30,12 @@ public class EditorialRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Editorial> saveEditorial(@RequestBody Editorial editorial) {
-        return ResponseEntity.ok(editorialService.saveEditorial(editorial));
+    public ResponseEntity<Optional<Editorial>> saveEditorial(@RequestBody Editorial editorial) {
+        Optional<Editorial> data = editorialService.saveEditorial(editorial);
+        if (data.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(data);
     }
 
     @PutMapping("/{id}")
