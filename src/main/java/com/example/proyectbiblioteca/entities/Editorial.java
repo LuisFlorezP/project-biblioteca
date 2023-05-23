@@ -9,13 +9,14 @@ import org.springframework.validation.annotation.Validated;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Validated
 @Table(name = "editorial")
 public class Editorial {
 
     @Id
-    @Column(name = "nombre", nullable = false, length = 30)
+    @Column(name = "nombre", nullable = false, length = 30, unique = true)
     @Size(min = 2, max = 30)
     private String nombre;
     @Column(name = "descripcion", nullable = false, length = 300)
