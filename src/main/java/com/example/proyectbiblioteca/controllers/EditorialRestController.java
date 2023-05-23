@@ -42,4 +42,12 @@ public class EditorialRestController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Editorial> deleteEditorial(@PathVariable String id) {
+        if (editorialService.deleteEditorial(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
 }
