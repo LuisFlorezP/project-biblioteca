@@ -23,8 +23,8 @@ public class EditorialRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Editorial>> getEditorial(@RequestBody String nombre) {
-        Optional<Editorial> editorial = editorialService.getEditorial(nombre);
+    public ResponseEntity<Optional<Editorial>> getEditorial(@PathVariable String id) {
+        Optional<Editorial> editorial = editorialService.getEditorial(id);
         if (editorial.equals(Optional.empty())) {
             return ResponseEntity.notFound().build();
         }
@@ -34,5 +34,14 @@ public class EditorialRestController {
     @PostMapping("")
     public ResponseEntity<Editorial> saveEditorial(@RequestBody Editorial editorial) {
         return ResponseEntity.ok(editorialService.saveEditorial(editorial));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Editorial> updateEditorial(@RequestBody Editorial editorial, @PathVariable String id) {
+        Editorial data = editorialService.updateEditorial(editorial, id);
+        if (data != null) {
+            return ResponseEntity.ok(data);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
