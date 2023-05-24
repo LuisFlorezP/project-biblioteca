@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class AutorService {
@@ -22,6 +23,9 @@ public class AutorService {
     }
 
     public Optional<Autor> saveAutor(Autor autor) {
+        if (verificarEmail(autor)) {
+            return Optional.empty();
+        }
         if (autorRepository.findByPseudonimo(autor.getPseudonimo()).isPresent()) {
             return Optional.empty();
         }
@@ -31,7 +35,11 @@ public class AutorService {
         return Optional.of(autorRepository.save(autor));
     }
 
+
     public Autor updateAutor(Autor autor, Long id) {
+        if (verificarEmail(autor)) {
+            return null;
+        }
         Optional<Autor> autorDB = autorRepository.findByPseudonimo(autor.getPseudonimo());
         if (autorDB.isPresent() && verificarMismoPseudonimo(autorDB.get().getPseudonimo(), autor.getPseudonimo())) {
             return null;
@@ -77,6 +85,17 @@ public class AutorService {
 
     private boolean verificarMismoPseudonimo(String pseudonimoDB, String pseudonimoNew) {
         if (pseudonimoDB.equals(pseudonimoNew)) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean verificarEmail(Autor autor) {
+        if (autor.getEmail() == null) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        if (pattern.matcher(autor.getEmail()).find()) {
             return false;
         }
         return true;
