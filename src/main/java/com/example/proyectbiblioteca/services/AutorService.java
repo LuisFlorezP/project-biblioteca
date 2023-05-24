@@ -22,6 +22,9 @@ public class AutorService {
     }
 
     public Optional<Autor> saveAutor(Autor autor) {
+        if (autorRepository.findByPseudonimo(autor.getPseudonimo()).isPresent()) {
+            return Optional.empty();
+        }
         if (verificarNombreApellidoPseudonimo(autor, true)) {
             return Optional.empty();
         }
