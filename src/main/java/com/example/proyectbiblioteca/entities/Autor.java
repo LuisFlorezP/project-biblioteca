@@ -1,5 +1,6 @@
 package com.example.proyectbiblioteca.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,8 +23,9 @@ public class Autor {
     private String apellido;
     @Column(name = "pseudonimo", unique = true)
     private String pseudonimo;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "pais_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "pais_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Pais nacionalidad;
     @Column(name = "email")
     private String email;

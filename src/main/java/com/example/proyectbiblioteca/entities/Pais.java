@@ -1,10 +1,10 @@
 package com.example.proyectbiblioteca.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -18,4 +18,6 @@ public class Pais {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    @OneToMany(mappedBy = "nacionalidad", cascade = CascadeType.ALL)
+    private Set<Autor> autors = new HashSet<>();
 }
