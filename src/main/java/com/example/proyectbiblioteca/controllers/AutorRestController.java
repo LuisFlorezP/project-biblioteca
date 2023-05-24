@@ -31,12 +31,12 @@ public class AutorRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Optional<Autor>> saveAutor(@RequestBody Autor autor) {
+    public ResponseEntity<Autor> saveAutor(@RequestBody Autor autor) {
         Optional<Autor> data = autorService.saveAutor(autor);
         if (data.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(data);
+        return ResponseEntity.ok(autor);
     }
 
     @PutMapping("/{id}")
