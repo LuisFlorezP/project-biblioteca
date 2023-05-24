@@ -32,6 +32,10 @@ public class AutorService {
     }
 
     public Autor updateAutor(Autor autor, Long id) {
+        Optional<Autor> autorDB = autorRepository.findByPseudonimo(autor.getPseudonimo());
+        if (autorDB.isPresent() && verificarMismoPseudonimo(autorDB.get().getPseudonimo(), autor.getPseudonimo())) {
+            return null;
+        }
         if (verificarNombreApellidoPseudonimo(autor, false)) {
             return null;
         }
@@ -63,9 +67,18 @@ public class AutorService {
             if (autor.getNombre() == null || autor.getApellido() == null) {
                 return true;
             }
+        } else if (autor.getNombre() == null && autor.getApellido() == null) {
+            return false;
         } else if (autor.getNombre() == null || autor.getApellido() == null) {
             return true;
         }
         return false;
+    }
+
+    private boolean verificarMismoPseudonimo(String pseudonimoDB, String pseudonimoNew) {
+        if (pseudonimoDB.equals(pseudonimoNew)) {
+            return false;
+        }
+        return true;
     }
 }
