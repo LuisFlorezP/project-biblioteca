@@ -30,6 +30,9 @@ public class UbicacionService {
     }
 
     public Ubicacion updateLocation(Ubicacion ubicacion, Long id) {
+        if (ubicacion.getPiso() == null || ubicacion.getSalon() == null || ubicacion.getEstante() == null) {
+            return null;
+        }
         return  ubicacionRepository.findById(id)
                 .map(
                         data -> {
