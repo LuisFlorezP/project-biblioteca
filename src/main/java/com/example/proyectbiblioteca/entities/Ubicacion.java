@@ -1,7 +1,13 @@
 package com.example.proyectbiblioteca.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "ubicacion_entity")
 public class Ubicacion {
