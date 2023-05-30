@@ -1,6 +1,5 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.repositories.UbicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +14,22 @@ public class UbicacionService {
     @Autowired
     private UbicacionRepository ubicacionRepository;
 
-    public List<Ubicacion> getAllUbicacion() {
+    public List<Ubicacion> getAllLocations() {
         return ubicacionRepository.findAll();
     }
 
-    public Optional<Ubicacion> getUbicacion(Long id) {
+    public Optional<Ubicacion> getLocation(Long id) {
         return ubicacionRepository.findById(id);
     }
 
-    public Optional<Ubicacion> saveUbicacion(Ubicacion ubicacion) {
+    public Optional<Ubicacion> saveLocation(Ubicacion ubicacion) {
         if (ubicacion.getPiso() == null || ubicacion.getSalon() == null || ubicacion.getEstante() == null) {
             return Optional.empty();
         }
         return Optional.of(ubicacionRepository.save(ubicacion));
     }
 
-    public Ubicacion updateUbicacion(Ubicacion ubicacion, Long id) {
+    public Ubicacion updateLocation(Ubicacion ubicacion, Long id) {
         return  ubicacionRepository.findById(id)
                 .map(
                         data -> {
@@ -42,7 +41,7 @@ public class UbicacionService {
                 ).orElse(null);
     }
 
-    public boolean deleteUbicacion(Long id) {
+    public boolean deleteLocation(Long id) {
         return ubicacionRepository.findById(id)
                 .map(ubicacion -> {
                     ubicacionRepository.delete(ubicacion);
