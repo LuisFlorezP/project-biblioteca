@@ -10,23 +10,19 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "autorEntity")
+@Table(name = "autor-entity")
 public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "nombre")
     private String nombre;
-    @Column(name = "apellido")
     private String apellido;
-    @Column(name = "pseudonimo", unique = true)
+    @Column(unique = true)
     private String pseudonimo;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "pais_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Pais nacionalidad;
-    @Column(name = "email")
     private String email;
 }

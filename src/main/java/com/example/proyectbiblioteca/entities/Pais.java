@@ -12,6 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "pais_entity")
 public class Pais {
 
     @Id
