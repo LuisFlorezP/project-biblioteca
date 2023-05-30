@@ -12,9 +12,9 @@ public class GenerateValidation {
         }
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         if (pattern.matcher(email).find()) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public static boolean verificarNombreApellidoPseudonimo(Autor autor, boolean nacionalidad) {
