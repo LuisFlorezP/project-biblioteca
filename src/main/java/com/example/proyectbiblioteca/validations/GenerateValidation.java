@@ -39,4 +39,11 @@ public class GenerateValidation {
         }
         return true;
     }
+
+    public static boolean verificarNombreDescripcion(boolean nombreUnico, int longitud) {
+        if (nombreUnico || longitud > 255) {
+            return true;
+        }
+        return false;
+    }
 }
