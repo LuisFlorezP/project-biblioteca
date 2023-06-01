@@ -1,7 +1,9 @@
 package com.example.proyectbiblioteca.validations;
 
 import com.example.proyectbiblioteca.entities.Autor;
+import com.example.proyectbiblioteca.entities.Pais;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class GenerateValidation {
@@ -17,31 +19,42 @@ public class GenerateValidation {
         return true;
     }
 
-    public static boolean verificarNombreApellidoPseudonimo(Autor autor, boolean nacionalidad) {
-        if (autor.getNacionalidad() == null && nacionalidad) {
-            return true;
-        }
-        if (autor.getPseudonimo() == null) {
-            if (autor.getNombre() == null || autor.getApellido() == null) {
+    public static boolean verificarNombreApellidoPseudonimo(Autor autor) {
+        if (autor.getPseudonimo().isEmpty()) {
+            if (autor.getNombre().isEmpty() || autor.getApellido().isEmpty()) {
                 return true;
             }
-        } else if (autor.getNombre() == null && autor.getApellido() == null) {
+        } else if (autor.getNombre().isEmpty() && autor.getApellido().isEmpty()) {
             return false;
-        } else if (autor.getNombre() == null || autor.getApellido() == null) {
+        } else if (autor.getNombre().isEmpty() || autor.getApellido().isEmpty()) {
             return true;
         }
         return false;
     }
 
-    public static boolean verificarMismoPseudonimo(String pseudonimoDB, String pseudonimoNew) {
-        if (pseudonimoDB.equals(pseudonimoNew)) {
-            return false;
+    public static boolean verificarNacionalidad(Pais pais) {
+        if (pais == null) {
+            return true;
         }
-        return true;
+        return false;
     }
 
-    public static boolean verificarNombreDescripcion(boolean nombreUnico, int longitud) {
-        if (nombreUnico || longitud > 255) {
+    public static boolean verificarDescripcionCategoria(int longitud) {
+        if (longitud > 255) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean verificarNombre(String nombre) {
+        if (nombre.length() < 2 || nombre.length() > 30) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean verificarDescripcionEditorial(String descripcion) {
+        if (descripcion.length() > 300) {
             return true;
         }
         return false;

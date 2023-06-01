@@ -24,14 +24,20 @@ public class CategoriaService extends GenerateValidation {
     }
 
     public Optional<Categoria> saveCategory(Categoria categoria) {
-        if (verificarNombreDescripcion(categoriaRepository.findByNombre(categoria.getNombre()).isPresent(), categoria.getDescripcion().length())) {
-            return Optional.empty();
-        }
-        return Optional.of(categoriaRepository.save(categoria));
+        return categoriaRepository.findByNombre(categoria.getNombre())
+                .map(
+                        data -> {
+                            if (verificarDescripcionCategoria(categoria.getDescripcion().length())) {
+                                return Optional.<Categoria>empty();
+                            }
+                            return Optional.of(categoriaRepository.save(categoria));
+                        }
+                ).orElse(null);
     }
 
     public Categoria updateCategory(Categoria categoria, Long id) {
-        if (verificarNombreDescripcion(!categoriaRepository.findByNombre(categoria.getNombre()).get().getNombre().equals(categoria.getNombre()), categoria.getDescripcion().length())) {
+        Categoria search = categoriaRepository.findByNombre(categoria.getNombre()).get();
+        if (search.getNombre().equals(categoria.getNombre()) || verificarDescripcionCategoria(categoria.getDescripcion().length())) {
             return null;
         }
         return  categoriaRepository.findById(id)

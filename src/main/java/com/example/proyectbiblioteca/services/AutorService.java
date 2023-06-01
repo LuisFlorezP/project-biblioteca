@@ -23,28 +23,15 @@ public class AutorService extends GenerateValidation {
     }
 
     public Optional<Autor> saveAutor(Autor autor) {
-        if (verificarEmail(autor.getEmail())) {
-            return Optional.empty();
-        }
-        if (autorRepository.findByPseudonimo(autor.getPseudonimo()).isPresent()) {
-            return Optional.empty();
-        }
-        if (verificarNombreApellidoPseudonimo(autor, true)) {
+        if (autorRepository.findByPseudonimo(autor.getPseudonimo()).isPresent() || verificarEmail(autor.getEmail()) || verificarNombreApellidoPseudonimo(autor) || verificarNacionalidad(autor.getNacionalidad())) {
             return Optional.empty();
         }
         return Optional.of(autorRepository.save(autor));
     }
 
-
     public Autor updateAutor(Autor autor, Long id) {
-        if (verificarEmail(autor.getEmail())) {
-            return null;
-        }
         Optional<Autor> autorDB = autorRepository.findByPseudonimo(autor.getPseudonimo());
-        if (autorDB.isPresent() && verificarMismoPseudonimo(autorDB.get().getPseudonimo(), autor.getPseudonimo())) {
-            return null;
-        }
-        if (verificarNombreApellidoPseudonimo(autor, false)) {
+        if (autorDB.isPresent() || verificarEmail(autor.getEmail()) || autorDB.get().getPseudonimo().equals(autor.getPseudonimo()) || verificarNombreApellidoPseudonimo(autor)) {
             return null;
         }
         return  autorRepository.findById(id)
@@ -60,10 +47,10 @@ public class AutorService extends GenerateValidation {
     }
 
     public boolean deleteAutor(Long id) {
-        if (autorRepository.findById(id).equals(Optional.empty())) {
-            return false;
+        if (autorRepository.findById(id).isPresent()) {
+            autorRepository.deleteById(id);
+            return true;
         }
-        autorRepository.deleteById(id);
-        return true;
+        return false;
     }
 }
