@@ -15,7 +15,7 @@ public class UbicacionService {
 
     @Autowired
     private UbicacionRepository ubicacionRepository;
-    @Autowired(required = true)
+    @Autowired
     private LocationMapper locationMapper;
 
     public List<Location> getAllLocations() {
