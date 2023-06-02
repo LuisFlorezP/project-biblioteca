@@ -23,5 +23,5 @@ public interface LocationMapper {
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
     Ubicacion toUbicacion(Location location);
-    List<Ubicacion> toUbications(List<Ubicacion> ubicacions);
+    List<Ubicacion> toUbications(List<Location> locations);
 }
