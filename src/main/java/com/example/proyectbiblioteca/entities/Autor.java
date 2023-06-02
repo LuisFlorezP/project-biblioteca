@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -29,4 +27,52 @@ public class Autor {
     private Pais nacionalidad;
     @Column(name = "email")
     private String email;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getPseudonimo() {
+        return pseudonimo;
+    }
+
+    public void setPseudonimo(String pseudonimo) {
+        this.pseudonimo = pseudonimo;
+    }
+
+    public Pais getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(Pais nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

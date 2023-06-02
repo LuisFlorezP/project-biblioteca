@@ -3,8 +3,6 @@ package com.example.proyectbiblioteca.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -22,4 +20,36 @@ public class Ubicacion {
     private String salon;
     @Column(name = "estante", nullable = false)
     private String estante;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPiso() {
+        return piso;
+    }
+
+    public void setPiso(String piso) {
+        this.piso = piso;
+    }
+
+    public String getSalon() {
+        return salon;
+    }
+
+    public void setSalon(String salon) {
+        this.salon = salon;
+    }
+
+    public String getEstante() {
+        return estante;
+    }
+
+    public void setEstante(String estante) {
+        this.estante = estante;
+    }
 }
