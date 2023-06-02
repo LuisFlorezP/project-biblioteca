@@ -12,7 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface LocationMapper {
 
-
     @Mappings({
             @Mapping(source = "piso", target = "floor"),
             @Mapping(source = "salon", target = "lounge"),
