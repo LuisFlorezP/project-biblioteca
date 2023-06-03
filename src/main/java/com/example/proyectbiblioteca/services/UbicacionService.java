@@ -6,9 +6,7 @@ import com.example.proyectbiblioteca.mappers.LocationMapper;
 import com.example.proyectbiblioteca.repositories.UbicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UbicacionService {
@@ -23,30 +21,31 @@ public class UbicacionService {
     }
 
     public Location getLocation(Long id) {
-        Optional<Ubicacion> ubicacion = ubicacionRepository.findById(id);
-        return ubicacion.map(value -> locationMapper.toLocation(value))
+        return ubicacionRepository.findById(id)
+                .map(ubicacion -> locationMapper.toLocation(ubicacion))
                 .orElse(null);
     }
 
-    public Optional<Location> saveLocation(Location location) {
-        if (location.getFloor() == null || location.getLounge() == null || location.getShelf() == null) {
-            return Optional.empty();
-        }
-        Ubicacion ubicacion = locationMapper.toUbicacion(location);
-        return Optional.of(locationMapper.toLocation(ubicacionRepository.save(ubicacion)));
-    }
-
-    public Location updateLocation(Location location, Long id) {
+    public Location saveLocation(Location location) {
         if (location.getFloor() == null || location.getLounge() == null || location.getShelf() == null) {
             return null;
         }
+        Ubicacion ubicacion = ubicacionRepository.save(locationMapper.toUbicacion(location));
+        return locationMapper.toLocation(ubicacion);
+    }
+
+    public Location updateLocation(Location location, Long id) {
         return  ubicacionRepository.findById(id)
                 .map(
                         data -> {
+                            if (location.getFloor() == null || location.getLounge() == null || location.getShelf() == null) {
+                                return null;
+                            }
                             data.setPiso(location.getFloor());
                             data.setSalon(location.getLounge());
                             data.setEstante(location.getShelf());
-                            return locationMapper.toLocation(ubicacionRepository.save(data));
+                            Ubicacion ubicacion = ubicacionRepository.save(data);
+                            return locationMapper.toLocation(ubicacion);
                         }
                 ).orElse(null);
     }

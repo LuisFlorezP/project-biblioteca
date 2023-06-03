@@ -1,7 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.dto.Location;
-import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.services.UbicacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,9 +32,11 @@ public class UbicacionRestController {
 
     @PostMapping("/")
     public ResponseEntity<Location> saveLocation(@RequestBody Location location) {
-        return ubicacionService.saveLocation(location)
-                .map(data -> new ResponseEntity<>(data, HttpStatus.CREATED))
-                .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        Location data = ubicacionService.saveLocation(location);
+        if (data != null) {
+            return new ResponseEntity<>(data, HttpStatus.CREATED);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
@@ -44,7 +45,7 @@ public class UbicacionRestController {
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
