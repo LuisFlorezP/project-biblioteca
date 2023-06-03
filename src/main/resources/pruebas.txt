@@ -41,3 +41,31 @@
   "name": "Cuento",
   "description": "Los cuentos son mucho más que historias para niños, como demuestra Oscar Wilde, todo un clásico de la literatura, con estos cuentos llenos de valores morales, escritos de forma exquisita."
 }
+
+****************************** LOCATION ******************************
+
+{
+  "floor": "2",
+  "lounge": "K-201",
+  "shelf": "17"
+},
+{
+  "floor": "1",
+  "lounge": "N-400",
+  "shelf": "1"
+},
+{
+  "floor": "2",
+  "lounge": "M-111",
+  "shelf": "20"
+},
+{
+  "floor": "4",
+  "lounge": "L-177",
+  "shelf": "3"
+},
+{
+  "floor": "3",
+  "lounge": "M-222",
+  "shelf": "2"
+}
