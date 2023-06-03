@@ -1,0 +1,43 @@
+
+****************************** CATEGORY ******************************
+
+{
+  "name": "Aventuras",
+  "description": "No solo son aventuras que querrían vivir, también son las travesuras con las que se pueden sentir identificados. Una vez enganchados a la historia, entenderán la crítica que el autor pretende hacer a la sociedad hipócrita e injusta."
+},
+{
+  "name": "Ciencia Ficción",
+  "description": "La ciencia ficción atrae a muchos jóvenes a la gran pantalla, ¿por qué no les puede gustar también leer novelas sobre ello? Y, puestos a elegir, ¿por qué no comenzar con una obra de uno de los considerados padres de la ciencia ficción?"
+},
+{
+  "name": "Policíaca",
+  "description": "En estos relatos, tus estudiantes descubrirán la carismática personalidad de uno de los personajes literarios más universales y aplicarán con él el razonamiento deductivo: observar, analizar y teorizar para llegar a una conclusión."
+},
+{
+  "name": "Terror y misterio",
+  "description": "Podrán disfrutar del horror gótico y terror cósmico que definen su obra, pero sobre todo aprenderán de un autor tremendamente expresivo y capaz de generar atmósferas muy verosímiles sobre relatos terroríficos."
+},
+{
+  "name": "Romántica",
+  "description": "La búsqueda de la felicidad, la insatisfacción vital o el inconformismo no les serán sentimientos del todo ajenos a tus estudiantes y, además, descubrirán la crítica que hace el autor al exceso de sentimentalismo del movimiento romántico."
+},
+{
+  "name": "Humor",
+  "description": "También del humor se aprende y además nos ayuda a entender el mundo. Lejos de ser un género superficial, nos sirve para analizar, comprender mejor y reflexionar sobre la realidad y el entorno, tanto pasado como actual."
+},
+{
+  "name": "Poesía",
+  "description": "Esta selección de 5 poemas incluye análisis detallados y anotaciones explicativas, para que el alumnado entienda la obra del poeta a la vez que disfruta de este género."
+},
+{
+  "name": "Mitología",
+  "description": "A través de esta adaptación del clásico de Ovidio, tus estudiantes descubrirán intensas historias mitológicas y sentimientos universales con los que se podrán sentir identificados. La mitología es, sin duda, una interesante fuente de aprendizaje."
+},
+{
+  "name": "Teatro",
+  "description": "Si uno de tus alumnos tiene como afición el teatro, también leerlo le gustará. Humor, situaciones absurdas y giros inesperados con los que podrán divertirse. a la vez que descubrirán la obra más renovadora del teatro cómico español del siglo pasado."
+},
+{
+  "name": "Cuento",
+  "description": "Los cuentos son mucho más que historias para niños, como demuestra Oscar Wilde, todo un clásico de la literatura, con estos cuentos llenos de valores morales, escritos de forma exquisita."
+}
