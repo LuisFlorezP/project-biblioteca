@@ -20,13 +20,13 @@ public class GenerateValidation {
     }
 
     public static boolean verificarNombreApellidoPseudonimo(Autor autor) {
-        if (autor.getPseudonimo().isEmpty()) {
-            if (autor.getNombre().isEmpty() || autor.getApellido().isEmpty()) {
+        if (autor.getPseudonimo() == null) {
+            if (autor.getNombre() == null || autor.getApellido() == null) {
                 return true;
             }
-        } else if (autor.getNombre().isEmpty() && autor.getApellido().isEmpty()) {
+        } else if (autor.getNombre() == null && autor.getApellido() == null) {
             return false;
-        } else if (autor.getNombre().isEmpty() || autor.getApellido().isEmpty()) {
+        } else if (autor.getNombre() == null || autor.getApellido() == null) {
             return true;
         }
         return false;
