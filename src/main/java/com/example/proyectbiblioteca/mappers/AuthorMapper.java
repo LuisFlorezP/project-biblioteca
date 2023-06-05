@@ -15,7 +15,8 @@ public interface AuthorMapper {
     @Mappings({
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "apellido", target = "lastName"),
-            @Mapping(source = "pseudonimo", target = "pseudonym")
+            @Mapping(source = "pseudonimo", target = "pseudonym"),
+            @Mapping(source = "nacionalidad.id", target = "nationality")
     })
     Author toAuthor(Autor autor);
     List<Author> toAuthors(List<Autor> autors);
