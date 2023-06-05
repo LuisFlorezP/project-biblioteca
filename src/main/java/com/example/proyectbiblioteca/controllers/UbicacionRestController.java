@@ -1,6 +1,7 @@
 package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.dto.Location;
+import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.services.UbicacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +32,8 @@ public class UbicacionRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Location> saveLocation(@RequestBody Location location) {
-        Location data = ubicacionService.saveLocation(location);
+    public ResponseEntity<Location> saveLocation(@RequestBody Ubicacion ubicacion) {
+        Location data = ubicacionService.saveLocation(ubicacion);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.CREATED);
         }
@@ -40,8 +41,8 @@ public class UbicacionRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Location> updateLocation(@RequestBody Location location, @PathVariable Long id) {
-        Location data = ubicacionService.updateLocation(location, id);
+    public ResponseEntity<Location> updateLocation(@RequestBody Ubicacion ubicacion, @PathVariable Long id) {
+        Location data = ubicacionService.updateLocation(ubicacion, id);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }

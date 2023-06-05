@@ -1,6 +1,7 @@
 package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.dto.Category;
+import com.example.proyectbiblioteca.entities.Categoria;
 import com.example.proyectbiblioteca.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +31,8 @@ public class CategoriaRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Category> saveCategory(@RequestBody Category category) {
-        Category data = categoriaService.saveCategory(category);
+    public ResponseEntity<Category> saveCategory(@RequestBody Categoria categoria) {
+        Category data = categoriaService.saveCategory(categoria);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.CREATED);
         }
@@ -39,8 +40,8 @@ public class CategoriaRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody Category category, @PathVariable Long id) {
-        Category data = categoriaService.updateCategory(category, id);
+    public ResponseEntity<Category> updateCategory(@RequestBody Categoria categoria, @PathVariable Long id) {
+        Category data = categoriaService.updateCategory(categoria, id);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }

@@ -26,26 +26,24 @@ public class UbicacionService {
                 .orElse(null);
     }
 
-    public Location saveLocation(Location location) {
-        if (location.getFloor() == null || location.getLounge() == null || location.getShelf() == null) {
+    public Location saveLocation(Ubicacion ubicacion) {
+        if (ubicacion.getPiso() == null || ubicacion.getSalon() == null || ubicacion.getEstante() == null) {
             return null;
         }
-        Ubicacion ubicacion = ubicacionRepository.save(locationMapper.toUbicacion(location));
-        return locationMapper.toLocation(ubicacion);
+        return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
     }
 
-    public Location updateLocation(Location location, Long id) {
+    public Location updateLocation(Ubicacion ubicacion, Long id) {
         return  ubicacionRepository.findById(id)
                 .map(
                         data -> {
-                            if (location.getFloor() == null || location.getLounge() == null || location.getShelf() == null) {
+                            if (ubicacion.getPiso() == null || ubicacion.getSalon() == null || ubicacion.getEstante() == null) {
                                 return null;
                             }
-                            data.setPiso(location.getFloor());
-                            data.setSalon(location.getLounge());
-                            data.setEstante(location.getShelf());
-                            Ubicacion ubicacion = ubicacionRepository.save(data);
-                            return locationMapper.toLocation(ubicacion);
+                            data.setPiso(ubicacion.getPiso());
+                            data.setSalon(ubicacion.getSalon());
+                            data.setEstante(ubicacion.getEstante());
+                            return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
                         }
                 ).orElse(null);
     }

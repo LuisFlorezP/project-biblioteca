@@ -29,27 +29,25 @@ public class CategoriaService extends GenerateValidation {
 
     }
 
-    public Category saveCategory(Category category) {
-        Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(category.getName());
-        if (categoriaNombre.isPresent() || verificarDescripcionCategoria(category.getDescription().length())) {
+    public Category saveCategory(Categoria categoria) {
+        Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
+        if (categoriaNombre.isPresent() || verificarDescripcionCategoria(categoria.getDescripcion().length())) {
             return null;
         }
-        Categoria data = categoriaRepository.save(categoryMapper.toCategoria(category));
-        return categoryMapper.toCategory(data);
+        return categoryMapper.toCategory(categoriaRepository.save(categoria));
     }
 
-    public Category updateCategory(Category category, Long id) {
+    public Category updateCategory(Categoria categoria, Long id) {
         return  categoriaRepository.findById(id)
                 .map(
                         data -> {
-                            Optional<Categoria> search = categoriaRepository.findByNombre(category.getName());
-                            if ((search.isPresent() && !search.get().getNombre().equals(category.getName())) || verificarDescripcionCategoria(category.getDescription().length())) {
+                            Optional<Categoria> search = categoriaRepository.findByNombre(categoria.getNombre());
+                            if ((search.isPresent() && !search.get().getNombre().equals(categoria.getNombre())) || verificarDescripcionCategoria(categoria.getDescripcion().length())) {
                                 return null;
                             }
-                            data.setNombre(category.getName());
-                            data.setDescripcion(category.getDescription());
-                            Categoria categoria = categoriaRepository.save(data);
-                            return categoryMapper.toCategory(categoria);
+                            data.setNombre(categoria.getNombre());
+                            data.setDescripcion(categoria.getDescripcion());
+                            return categoryMapper.toCategory(categoriaRepository.save(data));
                         }
                 ).orElse(null);
     }
