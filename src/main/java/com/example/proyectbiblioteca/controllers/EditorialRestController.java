@@ -1,8 +1,10 @@
 package com.example.proyectbiblioteca.controllers;
 
+import com.example.proyectbiblioteca.dto.PublishingHouse;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.services.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -16,33 +18,33 @@ public class EditorialRestController {
     private EditorialService editorialService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Editorial>> getAllEditorials() {
-        return ResponseEntity.ok(editorialService.getAllEditorial());
+    public ResponseEntity<List<PublishingHouse>> getAllEditorials() {
+        return new ResponseEntity<>(editorialService.getAllEditorial(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Editorial>> getEditorial(@PathVariable Long id) {
-        Optional<Editorial> editorial = editorialService.getEditorial(id);
-        if (editorial.equals(Optional.empty())) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<PublishingHouse> getEditorial(@PathVariable Long id) {
+        PublishingHouse publishingHouse = editorialService.getEditorial(id);
+        if (publishingHouse != null) {
+            return new ResponseEntity<>(publishingHouse, HttpStatus.OK);
         }
-        return ResponseEntity.ok(editorial);
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/")
-    public ResponseEntity<Optional<Editorial>> saveEditorial(@RequestBody Editorial editorial) {
-        Optional<Editorial> data = editorialService.saveEditorial(editorial);
-        if (data.isEmpty()) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<PublishingHouse> saveEditorial(@RequestBody Editorial editorial) {
+        PublishingHouse data = editorialService.saveEditorial(editorial);
+        if (data != null) {
+            return new ResponseEntity<>(data, HttpStatus.CREATED);
         }
-        return ResponseEntity.ok(data);
+        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Editorial> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
-        Editorial data = editorialService.updateEditorial(editorial, id);
+    public ResponseEntity<PublishingHouse> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
+        PublishingHouse data = editorialService.updateEditorial(editorial, id);
         if (data != null) {
-            return ResponseEntity.ok(data);
+            return new ResponseEntity<>(data, HttpStatus.OK);
         }
         return ResponseEntity.notFound().build();
     }

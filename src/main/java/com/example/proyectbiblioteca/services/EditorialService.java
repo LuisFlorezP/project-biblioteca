@@ -1,6 +1,8 @@
 package com.example.proyectbiblioteca.services;
 
+import com.example.proyectbiblioteca.dto.PublishingHouse;
 import com.example.proyectbiblioteca.entities.Editorial;
+import com.example.proyectbiblioteca.mappers.PublishingHouseMapper;
 import com.example.proyectbiblioteca.repositories.EditorialRepository;
 import com.example.proyectbiblioteca.validations.GenerateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,33 +16,39 @@ public class EditorialService extends GenerateValidation {
 
     @Autowired
     private EditorialRepository editorialRepository;
+    @Autowired
+    private PublishingHouseMapper publishingHouseMapper;
 
-    public List<Editorial> getAllEditorial() {
-        return editorialRepository.findAll();
+    public List<PublishingHouse> getAllEditorial() {
+        return publishingHouseMapper.toPublishingHouses(editorialRepository.findAll());
     }
 
-    public Optional<Editorial> getEditorial(Long id) {
-        return editorialRepository.findById(id);
+    public PublishingHouse getEditorial(Long id) {
+        return editorialRepository.findById(id)
+                .map(editorial -> publishingHouseMapper.toPublishingHouse(editorial))
+                .orElse(null);
     }
 
-    public Optional<Editorial> saveEditorial(Editorial editorial) {
-        if (editorialRepository.findByNombre(editorial.getNombre()).isPresent() || verificarNombre(editorial.getNombre()) || verificarDescripcionEditorial(editorial.getDescripcion())) {
-            return Optional.empty();
+    public PublishingHouse saveEditorial(Editorial editorial) {
+        Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
+        if (editorialNombre.isPresent() || verificarNombre(editorial.getNombre()) || verificarDescripcionEditorial(editorial.getDescripcion())) {
+            return null;
         }
-        return Optional.of(editorialRepository.save(editorial));
+        return publishingHouseMapper.toPublishingHouse(editorialRepository.save(editorial));
     }
 
-    public Editorial updateEditorial(Editorial editorial, Long id) {
+    public PublishingHouse updateEditorial(Editorial editorial, Long id) {
         return  editorialRepository.findById(id)
                 .map(
-                    data -> {
-                        if (editorialRepository.findByNombre(editorial.getNombre()).get().equals(editorial) || verificarNombre(editorial.getNombre()) || verificarDescripcionEditorial(editorial.getDescripcion())) {
-
+                        data -> {
+                            Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
+                            if ((editorialNombre.isPresent() && !editorialNombre.get().getNombre().equals(editorial.getNombre())) || verificarNombre(editorial.getNombre()) || verificarDescripcionEditorial(editorial.getDescripcion())) {
+                                return null;
+                            }
+                            data.setNombre(editorial.getNombre());
+                            data.setDescripcion(editorial.getDescripcion());
+                            return publishingHouseMapper.toPublishingHouse(editorialRepository.save(data));
                         }
-                        data.setNombre(editorial.getNombre());
-                        data.setDescripcion(editorial.getDescripcion());
-                        return editorialRepository.save(data);
-                    }
                 ).orElse(null);
     }
 
