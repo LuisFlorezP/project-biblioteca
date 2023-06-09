@@ -7,7 +7,6 @@ import com.example.proyectbiblioteca.repositories.EditorialRepository;
 import com.example.proyectbiblioteca.validations.GenerateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +68,6 @@ public class EditorialService extends GenerateValidation {
                 }
                 search.map(
                         data -> {
-
                             data.setNombre(editorial.getNombre());
                             data.setDescripcion(editorial.getDescripcion());
                             return publishingHouseMapper.toPublishingHouse(editorialRepository.save(data));

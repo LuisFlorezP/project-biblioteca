@@ -2,14 +2,12 @@ package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.dto.editorial.EditorialDTO;
 import com.example.proyectbiblioteca.dto.editorial.ErrorEditorialDTO;
-import com.example.proyectbiblioteca.dto.editorial.ResponseEditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.services.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +50,7 @@ public class EditorialRestController {
     @PutMapping("/{id}")
     public ResponseEntity<EditorialDTO> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
         try {
-            return new ResponseEntity<>(editorialService.updateEditorial(editorial, id), HttpStatus.OK);
+            return new ResponseEntity<>(editorialService.updateEditorial(editorial, id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorEditorialDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
