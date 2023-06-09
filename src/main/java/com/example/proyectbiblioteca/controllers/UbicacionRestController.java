@@ -1,6 +1,8 @@
 package com.example.proyectbiblioteca.controllers;
 
+import com.example.proyectbiblioteca.dto.ubicacion.ErrorUbicacionDTO;
 import com.example.proyectbiblioteca.dto.ubicacion.ResponseUbicacionDTO;
+import com.example.proyectbiblioteca.dto.ubicacion.UbicacionDTO;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.services.UbicacionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,42 +21,50 @@ public class UbicacionRestController {
     private UbicacionService ubicacionService;
 
     @GetMapping("/")
-    public ResponseEntity<List<ResponseUbicacionDTO>> getAllLocations() {
-        return new ResponseEntity<>(ubicacionService.getAllLocations(), HttpStatus.OK);
+    public ResponseEntity<List<UbicacionDTO>> getAllLocations() {
+        try {
+            return new ResponseEntity<>(new ArrayList<>(ubicacionService.getAllLocations()), HttpStatus.OK);
+        } catch (Exception e) {
+            List<UbicacionDTO> ubicacionDTOS = new ArrayList<>();
+            ubicacionDTOS.add(new ErrorUbicacionDTO(e.getMessage()));
+            return new ResponseEntity<>(ubicacionDTOS, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseUbicacionDTO> getLocation(@PathVariable Long id) {
-        ResponseUbicacionDTO responseUbicacionDTO = ubicacionService.getLocation(id);
-        if (responseUbicacionDTO != null) {
-            return new ResponseEntity<>(responseUbicacionDTO, HttpStatus.OK);
+    public ResponseEntity<UbicacionDTO> getLocation(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(ubicacionService.getLocation(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorUbicacionDTO(e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/")
-    public ResponseEntity<ResponseUbicacionDTO> saveLocation(@RequestBody Ubicacion ubicacion) {
-        ResponseUbicacionDTO data = ubicacionService.saveLocation(ubicacion);
-        if (data != null) {
-            return new ResponseEntity<>(data, HttpStatus.CREATED);
+    public ResponseEntity<UbicacionDTO> saveLocation(@RequestBody Ubicacion ubicacion) {
+        try {
+            return new ResponseEntity<>(ubicacionService.saveLocation(ubicacion), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorUbicacionDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseUbicacionDTO> updateLocation(@RequestBody Ubicacion ubicacion, @PathVariable Long id) {
-        ResponseUbicacionDTO data = ubicacionService.updateLocation(ubicacion, id);
-        if (data != null) {
-            return new ResponseEntity<>(data, HttpStatus.OK);
+    public ResponseEntity<UbicacionDTO> updateLocation(@RequestBody Ubicacion ubicacion, @PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(ubicacionService.updateLocation(ubicacion, id), HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorUbicacionDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseUbicacionDTO> deleteLocation(@PathVariable Long id) {
-        if (ubicacionService.deleteLocation(id)) {
+    public ResponseEntity<UbicacionDTO> deleteLocation(@PathVariable Long id) {
+        try {
+            ubicacionService.deleteLocation(id);
             return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorUbicacionDTO(e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.notFound().build();
     }
 }

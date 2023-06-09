@@ -7,6 +7,7 @@ import com.example.proyectbiblioteca.repositories.UbicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UbicacionService {
@@ -16,44 +17,76 @@ public class UbicacionService {
     @Autowired
     private LocationMapper locationMapper;
 
-    public List<ResponseUbicacionDTO> getAllLocations() {
-        return locationMapper.toLocations(ubicacionRepository.findAll());
-    }
-
-    public ResponseUbicacionDTO getLocation(Long id) {
-        return ubicacionRepository.findById(id)
-                .map(ubicacion -> locationMapper.toLocation(ubicacion))
-                .orElse(null);
-    }
-
-    public ResponseUbicacionDTO saveLocation(Ubicacion ubicacion) {
-        if (ubicacion.getPiso() == null || ubicacion.getSalon() == null || ubicacion.getEstante() == null) {
-            return null;
+    public List<ResponseUbicacionDTO> getAllLocations() throws Exception {
+        try {
+            return locationMapper.toLocations(ubicacionRepository.findAll());
+        } catch (Exception e) {
+            throw new Exception("No se pudieron encontrar los registros de Ubicación.");
         }
-        return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
     }
 
-    public ResponseUbicacionDTO updateLocation(Ubicacion ubicacion, Long id) {
-        return  ubicacionRepository.findById(id)
-                .map(
+    public ResponseUbicacionDTO getLocation(Long id) throws Exception {
+        try {
+            Optional<Ubicacion> ubicacion = ubicacionRepository.findById(id);
+            if (ubicacion.isPresent()) {
+                return locationMapper.toLocation(ubicacion.get());
+            }
+            throw new Exception("La ubicación no ha sido encontrada.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ResponseUbicacionDTO saveLocation(Ubicacion ubicacion) throws Exception {
+        try {
+            if (ubicacion.getPiso() == null) {
+                throw new Exception("La ubicación debe registrar un piso.");
+            } else if (ubicacion.getSalon() == null) {
+                throw new Exception("La ubicación debe registrar un salón.");
+            } else if (ubicacion.getEstante() == null) {
+                throw new Exception("La ubicación debe registrar un estante.");
+            }
+            return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ResponseUbicacionDTO updateLocation(Ubicacion ubicacion, Long id) throws Exception {
+        try {
+            Optional<Ubicacion> search = ubicacionRepository.findById(id);
+            if (search.isPresent()) {
+                if (ubicacion.getPiso() == null) {
+                    throw new Exception("La ubicación debe registrar un piso.");
+                } else if (ubicacion.getSalon() == null) {
+                    throw new Exception("La ubicación debe registrar un salón.");
+                } else if (ubicacion.getEstante() == null) {
+                    throw new Exception("La ubicación debe registrar un estante.");
+                }
+                search.map(
                         data -> {
-                            if (ubicacion.getPiso() == null || ubicacion.getSalon() == null || ubicacion.getEstante() == null) {
-                                return null;
-                            }
                             data.setPiso(ubicacion.getPiso());
                             data.setSalon(ubicacion.getSalon());
                             data.setEstante(ubicacion.getEstante());
                             return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
                         }
-                ).orElse(null);
+                );
+            }
+            throw new Exception("La ubicación no ha sido encontrado según el id brindado.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
-    public boolean deleteLocation(Long id) {
-        return ubicacionRepository.findById(id)
-                .map(ubicacion -> {
-                    ubicacionRepository.delete(ubicacion);
-                    return true;
-                })
-                .orElse(false);
+    public void deleteLocation(Long id) throws Exception {
+        try {
+            if (ubicacionRepository.findById(id).isPresent()) {
+                ubicacionRepository.deleteById(id);
+                return;
+            }
+            throw new Exception("La ubicación no ha sido encontrada, por ende no ha sido eliminada.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }
