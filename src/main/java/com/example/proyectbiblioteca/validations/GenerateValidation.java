@@ -2,8 +2,6 @@ package com.example.proyectbiblioteca.validations;
 
 import com.example.proyectbiblioteca.entities.Autor;
 import com.example.proyectbiblioteca.entities.Pais;
-
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class GenerateValidation {
