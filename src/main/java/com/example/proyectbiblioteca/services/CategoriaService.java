@@ -18,46 +18,73 @@ public class CategoriaService extends GenerateValidation {
     @Autowired
     private CategoryMapper categoryMapper;
 
-    public List<ResponseCategoriaDTO> getAllCategories() {
-        return categoryMapper.toCategories(categoriaRepository.findAll());
-    }
-
-    public ResponseCategoriaDTO getCategory(Long id) {
-        return categoriaRepository.findById(id)
-                .map(categoria -> categoryMapper.toCategory(categoria))
-                .orElse(null);
-
-    }
-
-    public ResponseCategoriaDTO saveCategory(Categoria categoria) {
-        Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
-        if (categoriaNombre.isPresent() || verificarDescripcionCategoria(categoria.getDescripcion().length())) {
-            return null;
+    public List<ResponseCategoriaDTO> getAllCategories() throws Exception {
+        try {
+            return categoryMapper.toCategories(categoriaRepository.findAll());
+        } catch (Exception e) {
+            throw new Exception("No se pudieron encontrar los registros de Categoria.");
         }
-        return categoryMapper.toCategory(categoriaRepository.save(categoria));
     }
 
-    public ResponseCategoriaDTO updateCategory(Categoria categoria, Long id) {
-        return  categoriaRepository.findById(id)
-                .map(
-                        data -> {
-                            Optional<Categoria> search = categoriaRepository.findByNombre(categoria.getNombre());
-                            if ((search.isPresent() && !search.get().getNombre().equals(categoria.getNombre())) || verificarDescripcionCategoria(categoria.getDescripcion().length())) {
-                                return null;
-                            }
-                            data.setNombre(categoria.getNombre());
-                            data.setDescripcion(categoria.getDescripcion());
-                            return categoryMapper.toCategory(categoriaRepository.save(data));
-                        }
-                ).orElse(null);
+    public ResponseCategoriaDTO getCategory(Long id) throws Exception {
+        try {
+            Optional<Categoria> categoria = categoriaRepository.findById(id);
+            if (categoria.isPresent()) {
+                return categoryMapper.toCategory(categoria.get());
+            }
+            throw new Exception("La categoria no ha sido encontrada.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
-    public boolean deleteCategory(Long id) {
-        return categoriaRepository.findById(id)
-                .map(categoria -> {
-                    categoriaRepository.delete(categoria);
-                    return true;
-                })
-                .orElse(false);
+    public ResponseCategoriaDTO saveCategory(Categoria categoria) throws Exception {
+        try {
+            Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
+            if (categoriaNombre.isPresent()) {
+                throw new Exception("La categoria debe registrar un nombre único.");
+            }
+            if (verificarDescripcionCategoria(categoria.getDescripcion().length())) {
+                throw new Exception("La categoria debe registrar una descripción breve (hasta 255 caracteres).");
+            }
+            return categoryMapper.toCategory(categoriaRepository.save(categoria));
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ResponseCategoriaDTO updateCategory(Categoria categoria, Long id) throws Exception {
+        try {
+            Optional<Categoria> search = categoriaRepository.findById(id);
+            if (search.isPresent()) {
+                Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
+                if (categoriaNombre.isPresent() && !search.get().getNombre().equals(categoria.getNombre())) {
+                    throw new Exception("La categoria debe registrar un nombre único.");
+                }
+                if (verificarDescripcionCategoria(categoria.getDescripcion().length())) {
+                    throw new Exception("La categoria debe registrar una descripción breve (hasta 255 caracteres).");
+                }
+                search.map(data -> {
+                    data.setNombre(categoria.getNombre());
+                    data.setDescripcion(categoria.getDescripcion());
+                    return categoryMapper.toCategory(categoriaRepository.save(data));
+                });
+            }
+            throw new Exception("La categoria no ha sido encontrado según el id brindado.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public void deleteCategory(Long id) throws Exception {
+        try {
+            if (categoriaRepository.findById(id).isPresent()) {
+                categoriaRepository.deleteById(id);
+                return;
+            }
+            throw new Exception("La categoria no ha sido encontrada, por ende no ha sido eliminada.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }
