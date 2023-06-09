@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.categoria.CategoriaDTO;
+import com.example.proyectbiblioteca.dto.categoria.ResponseCategoriaDTO;
 import com.example.proyectbiblioteca.entities.Categoria;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -16,11 +16,11 @@ public interface CategoryMapper {
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description")
     })
-    CategoriaDTO toCategory(Categoria categoria);
-    List<CategoriaDTO> toCategories(List<Categoria> categorias);
+    ResponseCategoriaDTO toCategory(Categoria categoria);
+    List<ResponseCategoriaDTO> toCategories(List<Categoria> categorias);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Categoria toCategoria(CategoriaDTO categoriaDTO);
-    List<Categoria> toCategorias(List<CategoriaDTO> categories);
+    Categoria toCategoria(ResponseCategoriaDTO responseCategoriaDTO);
+    List<Categoria> toCategorias(List<ResponseCategoriaDTO> categories);
 }
