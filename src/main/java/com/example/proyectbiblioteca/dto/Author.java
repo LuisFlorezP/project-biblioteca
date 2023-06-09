@@ -8,7 +8,7 @@ public class Author {
     private String lastName;
     private String pseudonym;
     private String email;
-    private Integer nationality;
+    private Pais nationality;
 
     public String getName() {
         return name;
@@ -42,11 +42,11 @@ public class Author {
         this.email = email;
     }
 
-    public Integer getNationality() {
+    public Pais getNationality() {
         return nationality;
     }
 
-    public void setNationality(Integer nationality) {
+    public void setNationality(Pais nationality) {
         this.nationality = nationality;
     }
 }

@@ -1,16 +1,17 @@
 package com.example.proyectbiblioteca.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity
 @Table(name = "pais_entity")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Pais {
 
     @Id
@@ -19,8 +20,9 @@ public class Pais {
     private Long id;
     @Column(name = "nombre", unique = true)
     private String nombre;
-    @OneToMany(mappedBy = "nacionalidad", cascade = CascadeType.ALL)
-    private Set<Autor> autors = new HashSet<>();
+    @OneToMany(mappedBy = "nacionalidad")
+    @JsonBackReference
+    private List<Autor> autors;
 
     public Long getId() {
         return id;
@@ -38,11 +40,11 @@ public class Pais {
         this.nombre = nombre;
     }
 
-    public Set<Autor> getAutors() {
+    public List<Autor> getAutors() {
         return autors;
     }
 
-    public void setAutors(Set<Autor> autors) {
+    public void setAutors(List<Autor> autors) {
         this.autors = autors;
     }
 }

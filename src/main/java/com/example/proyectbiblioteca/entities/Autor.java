@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +23,7 @@ public class Autor {
     private String pseudonimo;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "pais_id", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonManagedReference
     private Pais nacionalidad;
     @Column(name = "email")
     private String email;
