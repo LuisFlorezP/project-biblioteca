@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.UbicacionDTO;
+import com.example.proyectbiblioteca.dto.ubicacion.UbicacionDTO;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.mappers.LocationMapper;
 import com.example.proyectbiblioteca.repositories.UbicacionRepository;

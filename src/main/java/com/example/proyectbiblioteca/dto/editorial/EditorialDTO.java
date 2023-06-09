@@ -1,6 +1,6 @@
-package com.example.proyectbiblioteca.dto;
+package com.example.proyectbiblioteca.dto.editorial;
 
-public class CategoriaDTO {
+public class EditorialDTO {
 
     private String name;
     private String description;

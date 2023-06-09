@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.EditorialDTO;
+import com.example.proyectbiblioteca.dto.editorial.EditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.mappers.PublishingHouseMapper;
 import com.example.proyectbiblioteca.repositories.EditorialRepository;

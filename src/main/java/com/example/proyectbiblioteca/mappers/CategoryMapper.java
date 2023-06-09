@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.CategoriaDTO;
+import com.example.proyectbiblioteca.dto.categoria.CategoriaDTO;
 import com.example.proyectbiblioteca.entities.Categoria;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

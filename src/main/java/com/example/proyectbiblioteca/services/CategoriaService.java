@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.CategoriaDTO;
+import com.example.proyectbiblioteca.dto.categoria.CategoriaDTO;
 import com.example.proyectbiblioteca.entities.Categoria;
 import com.example.proyectbiblioteca.mappers.CategoryMapper;
 import com.example.proyectbiblioteca.repositories.CategoriaRepository;

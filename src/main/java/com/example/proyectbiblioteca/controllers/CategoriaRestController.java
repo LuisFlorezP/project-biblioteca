@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.CategoriaDTO;
+import com.example.proyectbiblioteca.dto.categoria.CategoriaDTO;
 import com.example.proyectbiblioteca.entities.Categoria;
 import com.example.proyectbiblioteca.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;

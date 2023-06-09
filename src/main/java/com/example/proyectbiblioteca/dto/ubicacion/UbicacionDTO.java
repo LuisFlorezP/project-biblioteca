@@ -1,4 +1,4 @@
-package com.example.proyectbiblioteca.dto;
+package com.example.proyectbiblioteca.dto.ubicacion;
 
 public class UbicacionDTO {
 

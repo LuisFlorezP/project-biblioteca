@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.EditorialDTO;
+import com.example.proyectbiblioteca.dto.editorial.EditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.services.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;

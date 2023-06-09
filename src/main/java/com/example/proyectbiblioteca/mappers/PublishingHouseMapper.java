@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.EditorialDTO;
+import com.example.proyectbiblioteca.dto.editorial.EditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

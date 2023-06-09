@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.UbicacionDTO;
+import com.example.proyectbiblioteca.dto.ubicacion.UbicacionDTO;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.services.UbicacionService;
 import org.springframework.beans.factory.annotation.Autowired;

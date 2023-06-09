@@ -1,8 +1,8 @@
-package com.example.proyectbiblioteca.dto;
+package com.example.proyectbiblioteca.dto.autor;
 
 import com.example.proyectbiblioteca.entities.Pais;
 
-public class AutorDTO {
+public class ResponseAutorDTO extends AutorDTO {
 
     private String name;
     private String lastName;

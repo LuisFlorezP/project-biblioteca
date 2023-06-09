@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.AutorDTO;
+import com.example.proyectbiblioteca.dto.autor.ResponseAutorDTO;
 import com.example.proyectbiblioteca.entities.Autor;
 import com.example.proyectbiblioteca.mappers.AuthorMapper;
 import com.example.proyectbiblioteca.repositories.AutorRepository;
@@ -18,17 +18,17 @@ public class AutorService extends GenerateValidation {
     @Autowired
     private AuthorMapper authorMapper;
 
-    public List<AutorDTO> getAllAutor() {
+    public List<ResponseAutorDTO> getAllAutor() {
         return authorMapper.toAuthors(autorRepository.findAll());
     }
 
-    public AutorDTO getAutor(Long id) {
+    public ResponseAutorDTO getAutor(Long id) {
         return autorRepository.findById(id)
                 .map(autor -> authorMapper.toAuthor(autor))
                 .orElse(null);
     }
 
-    public AutorDTO saveAutor(Autor autor) {
+    public ResponseAutorDTO saveAutor(Autor autor) {
         Optional<Autor> autorPseudonimo = autorRepository.findByPseudonimo(autor.getPseudonimo());
         if (autorPseudonimo.isPresent() || verificarEmail(autor.getEmail()) || verificarNombreApellidoPseudonimo(autor) || verificarNacionalidad(autor.getNacionalidad())) {
             return null;
@@ -36,7 +36,7 @@ public class AutorService extends GenerateValidation {
         return authorMapper.toAuthor(autorRepository.save(autor));
     }
 
-    public AutorDTO updateAutor(Autor autor, Long id) {
+    public ResponseAutorDTO updateAutor(Autor autor, Long id) {
         return  autorRepository.findById(id)
                 .map(
                         data -> {
