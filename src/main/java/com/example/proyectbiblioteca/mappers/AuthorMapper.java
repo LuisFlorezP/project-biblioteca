@@ -16,16 +16,13 @@ public interface AuthorMapper {
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "apellido", target = "lastName"),
             @Mapping(source = "pseudonimo", target = "pseudonym"),
-            @Mapping(source = "nacionalidad.id", target = "nationality")
+            @Mapping(source = "nacionalidad", target = "nationality")
     })
     Author toAuthor(Autor autor);
     List<Author> toAuthors(List<Autor> autors);
 
     @InheritInverseConfiguration
-    @Mappings({
-            @Mapping(target = "id", ignore = true),
-            @Mapping(target = "nacionalidad", ignore = true)
-    })
+    @Mapping(target = "id", ignore = true)
     Autor toAutor(Author author);
     List<Autor> toAutors(List<Author> authors);
 }
