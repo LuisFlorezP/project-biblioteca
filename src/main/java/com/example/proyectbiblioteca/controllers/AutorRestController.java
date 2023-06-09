@@ -20,7 +20,7 @@ public class AutorRestController {
     private AutorService autorService;
 
     @GetMapping("/")
-    public ResponseEntity<List<AutorDTO>> getAllAutors() throws Exception {
+    public ResponseEntity<List<AutorDTO>> getAllAutors() {
         try {
             return ResponseEntity.ok(new ArrayList<>(autorService.getAllAutor()));
         } catch (Exception e) {
@@ -31,7 +31,7 @@ public class AutorRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AutorDTO> getAutor(@PathVariable Long id) throws Exception {
+    public ResponseEntity<AutorDTO> getAutor(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(autorService.getAutor(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class AutorRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<AutorDTO> saveAutor(@RequestBody Autor autor) throws Exception {
+    public ResponseEntity<AutorDTO> saveAutor(@RequestBody Autor autor) {
         try {
             return new ResponseEntity<>(autorService.saveAutor(autor), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class AutorRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AutorDTO> updateAutor(@RequestBody Autor autor, @PathVariable Long id) throws Exception {
+    public ResponseEntity<AutorDTO> updateAutor(@RequestBody Autor autor, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(autorService.updateAutor(autor, id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class AutorRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AutorDTO> deleteAutor(@PathVariable Long id) throws Exception {
+    public ResponseEntity<AutorDTO> deleteAutor(@PathVariable Long id) {
         try {
             autorService.deleteAutor(id);
             return ResponseEntity.noContent().build();
