@@ -1,5 +1,7 @@
 package com.example.proyectbiblioteca.controllers;
 
+import com.example.proyectbiblioteca.dto.editorial.EditorialDTO;
+import com.example.proyectbiblioteca.dto.editorial.ErrorEditorialDTO;
 import com.example.proyectbiblioteca.dto.editorial.ResponseEditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.services.EditorialService;
@@ -7,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,42 +21,50 @@ public class EditorialRestController {
     private EditorialService editorialService;
 
     @GetMapping("/")
-    public ResponseEntity<List<ResponseEditorialDTO>> getAllEditorials() {
-        return new ResponseEntity<>(editorialService.getAllEditorial(), HttpStatus.OK);
+    public ResponseEntity<List<EditorialDTO>> getAllEditorials() {
+        try {
+            return ResponseEntity.ok(new ArrayList<>(editorialService.getAllEditorials()));
+        } catch (Exception e) {
+            List<EditorialDTO> editorialDTOS = new ArrayList<>();
+            editorialDTOS.add(new ErrorEditorialDTO(e.getMessage()));
+            return new ResponseEntity<>(editorialDTOS, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseEditorialDTO> getEditorial(@PathVariable Long id) {
-        ResponseEditorialDTO responseEditorialDTO = editorialService.getEditorial(id);
-        if (responseEditorialDTO != null) {
-            return new ResponseEntity<>(responseEditorialDTO, HttpStatus.OK);
+    public ResponseEntity<EditorialDTO> getEditorial(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(editorialService.getEditorial(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorEditorialDTO(e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/")
-    public ResponseEntity<ResponseEditorialDTO> saveEditorial(@RequestBody Editorial editorial) {
-        ResponseEditorialDTO data = editorialService.saveEditorial(editorial);
-        if (data != null) {
-            return new ResponseEntity<>(data, HttpStatus.CREATED);
+    public ResponseEntity<EditorialDTO> saveEditorial(@RequestBody Editorial editorial) {
+        try {
+            return new ResponseEntity<>(editorialService.saveEditorial(editorial), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorEditorialDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseEditorialDTO> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
-        ResponseEditorialDTO data = editorialService.updateEditorial(editorial, id);
-        if (data != null) {
-            return new ResponseEntity<>(data, HttpStatus.OK);
+    public ResponseEntity<EditorialDTO> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(editorialService.updateEditorial(editorial, id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorEditorialDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Editorial> deleteEditorial(@PathVariable Long id) {
-        if (editorialService.deleteEditorial(id)) {
+    public ResponseEntity<EditorialDTO> deleteEditorial(@PathVariable Long id) {
+        try {
+            editorialService.deleteEditorial(id);
             return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorEditorialDTO(e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.badRequest().build();
     }
 }

@@ -19,44 +19,78 @@ public class EditorialService extends GenerateValidation {
     @Autowired
     private PublishingHouseMapper publishingHouseMapper;
 
-    public List<ResponseEditorialDTO> getAllEditorial() {
-        return publishingHouseMapper.toPublishingHouses(editorialRepository.findAll());
-    }
-
-    public ResponseEditorialDTO getEditorial(Long id) {
-        return editorialRepository.findById(id)
-                .map(editorial -> publishingHouseMapper.toPublishingHouse(editorial))
-                .orElse(null);
-    }
-
-    public ResponseEditorialDTO saveEditorial(Editorial editorial) {
-        Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
-        if (editorialNombre.isPresent() || verificarNombre(editorial.getNombre()) || verificarDescripcionEditorial(editorial.getDescripcion())) {
-            return null;
+    public List<ResponseEditorialDTO> getAllEditorials() throws Exception {
+        try {
+            return publishingHouseMapper.toPublishingHouses(editorialRepository.findAll());
+        } catch (Exception e) {
+            throw new Exception("No se pudieron encontrar los registros de Editorial.");
         }
-        return publishingHouseMapper.toPublishingHouse(editorialRepository.save(editorial));
     }
 
-    public ResponseEditorialDTO updateEditorial(Editorial editorial, Long id) {
-        return  editorialRepository.findById(id)
-                .map(
+    public ResponseEditorialDTO getEditorial(Long id) throws Exception {
+        try {
+            Optional<Editorial> editorial = editorialRepository.findById(id);
+            if (editorial.isPresent()) {
+                return publishingHouseMapper.toPublishingHouse(editorial.get());
+            }
+            throw new Exception("La editorial no ha sido encontrada.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ResponseEditorialDTO saveEditorial(Editorial editorial) throws Exception {
+        try {
+            Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
+            if (editorialNombre.isPresent()) {
+                throw new Exception("La editorial debe registrar un nombre único.");
+            } else if (verificarNombre(editorial.getNombre())) {
+                throw new Exception("La editorial debe registrar un nombre válido (entre 2 y 30 caracteres).");
+            } else if (verificarDescripcionEditorial(editorial.getDescripcion())) {
+                throw new Exception("La editorial debe registrar una descripción válida (hasta 300 caracteres).");
+            }
+            return publishingHouseMapper.toPublishingHouse(editorialRepository.save(editorial));
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ResponseEditorialDTO updateEditorial(Editorial editorial, Long id) throws Exception {
+        try {
+            Optional<Editorial> search = editorialRepository.findById(id);
+            if (search.isPresent()) {
+                Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
+                if (editorialNombre.isPresent() && !editorialNombre.get().getNombre().equals(editorial.getNombre())) {
+                    throw new Exception("La editorial debe registrar un nombre único.");
+                } else if (verificarNombre(editorial.getNombre())) {
+                    throw new Exception("La editorial debe registrar un nombre válido (entre 2 y 30 caracteres).");
+                } else if (verificarDescripcionEditorial(editorial.getDescripcion())) {
+                    throw new Exception("La editorial debe registrar una descripción válida (hasta 300 caracteres).");
+                }
+                search.map(
                         data -> {
-                            Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
-                            if ((editorialNombre.isPresent() && !editorialNombre.get().getNombre().equals(editorial.getNombre())) || verificarNombre(editorial.getNombre()) || verificarDescripcionEditorial(editorial.getDescripcion())) {
-                                return null;
-                            }
+
                             data.setNombre(editorial.getNombre());
                             data.setDescripcion(editorial.getDescripcion());
                             return publishingHouseMapper.toPublishingHouse(editorialRepository.save(data));
                         }
-                ).orElse(null);
+                );
+            }
+            throw new Exception("La editorial no ha sido encontrado según el id brindado.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
-    public boolean deleteEditorial(Long id) {
-        if (editorialRepository.findById(id).equals(Optional.empty())) {
-            return false;
+    public void deleteEditorial(Long id) throws Exception {
+        try {
+            if (editorialRepository.findById(id).isPresent()) {
+                editorialRepository.deleteById(id);
+                return;
+            }
+            throw new Exception("La editorial no ha sido encontrada, por ende no ha sido eliminada.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
-        editorialRepository.deleteById(id);
-        return true;
     }
 }
