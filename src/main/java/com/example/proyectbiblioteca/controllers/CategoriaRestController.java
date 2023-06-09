@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.Category;
+import com.example.proyectbiblioteca.dto.CategoriaDTO;
 import com.example.proyectbiblioteca.entities.Categoria;
 import com.example.proyectbiblioteca.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +17,22 @@ public class CategoriaRestController {
     private CategoriaService categoriaService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Category>> getAllCategories() {
+    public ResponseEntity<List<CategoriaDTO>> getAllCategories() {
         return new ResponseEntity<>(categoriaService.getAllCategories(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategory(@PathVariable Long id) {
-        Category category = categoriaService.getCategory(id);
-        if (category != null) {
-            return new  ResponseEntity<>(category, HttpStatus.OK);
+    public ResponseEntity<CategoriaDTO> getCategory(@PathVariable Long id) {
+        CategoriaDTO categoriaDTO = categoriaService.getCategory(id);
+        if (categoriaDTO != null) {
+            return new  ResponseEntity<>(categoriaDTO, HttpStatus.OK);
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/")
-    public ResponseEntity<Category> saveCategory(@RequestBody Categoria categoria) {
-        Category data = categoriaService.saveCategory(categoria);
+    public ResponseEntity<CategoriaDTO> saveCategory(@RequestBody Categoria categoria) {
+        CategoriaDTO data = categoriaService.saveCategory(categoria);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.CREATED);
         }
@@ -40,8 +40,8 @@ public class CategoriaRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody Categoria categoria, @PathVariable Long id) {
-        Category data = categoriaService.updateCategory(categoria, id);
+    public ResponseEntity<CategoriaDTO> updateCategory(@RequestBody Categoria categoria, @PathVariable Long id) {
+        CategoriaDTO data = categoriaService.updateCategory(categoria, id);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }
@@ -49,7 +49,7 @@ public class CategoriaRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Category> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<CategoriaDTO> deleteCategory(@PathVariable Long id) {
         if (categoriaService.deleteCategory(id)) {
             return ResponseEntity.noContent().build();
         }

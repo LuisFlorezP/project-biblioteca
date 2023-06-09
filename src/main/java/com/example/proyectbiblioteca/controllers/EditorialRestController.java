@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.PublishingHouse;
+import com.example.proyectbiblioteca.dto.EditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.services.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/editorials")
@@ -18,22 +17,22 @@ public class EditorialRestController {
     private EditorialService editorialService;
 
     @GetMapping("/")
-    public ResponseEntity<List<PublishingHouse>> getAllEditorials() {
+    public ResponseEntity<List<EditorialDTO>> getAllEditorials() {
         return new ResponseEntity<>(editorialService.getAllEditorial(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PublishingHouse> getEditorial(@PathVariable Long id) {
-        PublishingHouse publishingHouse = editorialService.getEditorial(id);
-        if (publishingHouse != null) {
-            return new ResponseEntity<>(publishingHouse, HttpStatus.OK);
+    public ResponseEntity<EditorialDTO> getEditorial(@PathVariable Long id) {
+        EditorialDTO editorialDTO = editorialService.getEditorial(id);
+        if (editorialDTO != null) {
+            return new ResponseEntity<>(editorialDTO, HttpStatus.OK);
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/")
-    public ResponseEntity<PublishingHouse> saveEditorial(@RequestBody Editorial editorial) {
-        PublishingHouse data = editorialService.saveEditorial(editorial);
+    public ResponseEntity<EditorialDTO> saveEditorial(@RequestBody Editorial editorial) {
+        EditorialDTO data = editorialService.saveEditorial(editorial);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.CREATED);
         }
@@ -41,8 +40,8 @@ public class EditorialRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PublishingHouse> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
-        PublishingHouse data = editorialService.updateEditorial(editorial, id);
+    public ResponseEntity<EditorialDTO> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
+        EditorialDTO data = editorialService.updateEditorial(editorial, id);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }

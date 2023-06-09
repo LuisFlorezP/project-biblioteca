@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.dto;
 
-public class Category {
+public class CategoriaDTO {
 
     private String name;
     private String description;

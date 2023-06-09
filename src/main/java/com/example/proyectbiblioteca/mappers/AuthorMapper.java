@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.Author;
+import com.example.proyectbiblioteca.dto.AutorDTO;
 import com.example.proyectbiblioteca.entities.Autor;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -18,11 +18,11 @@ public interface AuthorMapper {
             @Mapping(source = "pseudonimo", target = "pseudonym"),
             @Mapping(source = "nacionalidad", target = "nationality")
     })
-    Author toAuthor(Autor autor);
-    List<Author> toAuthors(List<Autor> autors);
+    AutorDTO toAuthor(Autor autor);
+    List<AutorDTO> toAuthors(List<Autor> autors);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Autor toAutor(Author author);
-    List<Autor> toAutors(List<Author> authors);
+    Autor toAutor(AutorDTO autorDTO);
+    List<Autor> toAutors(List<AutorDTO> autorDTOS);
 }

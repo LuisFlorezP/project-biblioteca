@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.Category;
+import com.example.proyectbiblioteca.dto.CategoriaDTO;
 import com.example.proyectbiblioteca.entities.Categoria;
 import com.example.proyectbiblioteca.mappers.CategoryMapper;
 import com.example.proyectbiblioteca.repositories.CategoriaRepository;
@@ -18,18 +18,18 @@ public class CategoriaService extends GenerateValidation {
     @Autowired
     private CategoryMapper categoryMapper;
 
-    public List<Category> getAllCategories() {
+    public List<CategoriaDTO> getAllCategories() {
         return categoryMapper.toCategories(categoriaRepository.findAll());
     }
 
-    public Category getCategory(Long id) {
+    public CategoriaDTO getCategory(Long id) {
         return categoriaRepository.findById(id)
                 .map(categoria -> categoryMapper.toCategory(categoria))
                 .orElse(null);
 
     }
 
-    public Category saveCategory(Categoria categoria) {
+    public CategoriaDTO saveCategory(Categoria categoria) {
         Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
         if (categoriaNombre.isPresent() || verificarDescripcionCategoria(categoria.getDescripcion().length())) {
             return null;
@@ -37,7 +37,7 @@ public class CategoriaService extends GenerateValidation {
         return categoryMapper.toCategory(categoriaRepository.save(categoria));
     }
 
-    public Category updateCategory(Categoria categoria, Long id) {
+    public CategoriaDTO updateCategory(Categoria categoria, Long id) {
         return  categoriaRepository.findById(id)
                 .map(
                         data -> {

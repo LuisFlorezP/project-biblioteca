@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.Location;
+import com.example.proyectbiblioteca.dto.UbicacionDTO;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.mappers.LocationMapper;
 import com.example.proyectbiblioteca.repositories.UbicacionRepository;
@@ -16,24 +16,24 @@ public class UbicacionService {
     @Autowired
     private LocationMapper locationMapper;
 
-    public List<Location> getAllLocations() {
+    public List<UbicacionDTO> getAllLocations() {
         return locationMapper.toLocations(ubicacionRepository.findAll());
     }
 
-    public Location getLocation(Long id) {
+    public UbicacionDTO getLocation(Long id) {
         return ubicacionRepository.findById(id)
                 .map(ubicacion -> locationMapper.toLocation(ubicacion))
                 .orElse(null);
     }
 
-    public Location saveLocation(Ubicacion ubicacion) {
+    public UbicacionDTO saveLocation(Ubicacion ubicacion) {
         if (ubicacion.getPiso() == null || ubicacion.getSalon() == null || ubicacion.getEstante() == null) {
             return null;
         }
         return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
     }
 
-    public Location updateLocation(Ubicacion ubicacion, Long id) {
+    public UbicacionDTO updateLocation(Ubicacion ubicacion, Long id) {
         return  ubicacionRepository.findById(id)
                 .map(
                         data -> {

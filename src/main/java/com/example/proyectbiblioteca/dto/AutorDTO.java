@@ -2,7 +2,7 @@ package com.example.proyectbiblioteca.dto;
 
 import com.example.proyectbiblioteca.entities.Pais;
 
-public class Author {
+public class AutorDTO {
 
     private String name;
     private String lastName;

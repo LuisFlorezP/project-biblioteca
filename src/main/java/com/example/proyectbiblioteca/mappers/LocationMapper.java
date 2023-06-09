@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.Location;
+import com.example.proyectbiblioteca.dto.UbicacionDTO;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -17,11 +17,11 @@ public interface LocationMapper {
             @Mapping(source = "salon", target = "lounge"),
             @Mapping(source = "estante", target = "shelf")
     })
-    Location toLocation(Ubicacion ubicacion);
-    List<Location> toLocations(List<Ubicacion> ubicacions);
+    UbicacionDTO toLocation(Ubicacion ubicacion);
+    List<UbicacionDTO> toLocations(List<Ubicacion> ubicacions);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Ubicacion toUbicacion(Location location);
-    List<Ubicacion> toUbications(List<Location> locations);
+    Ubicacion toUbicacion(UbicacionDTO ubicacionDTO);
+    List<Ubicacion> toUbications(List<UbicacionDTO> ubicacionDTOS);
 }

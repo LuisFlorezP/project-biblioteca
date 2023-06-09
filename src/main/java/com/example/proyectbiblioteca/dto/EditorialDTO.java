@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.dto;
 
-public class PublishingHouse {
+public class EditorialDTO {
 
     private String name;
     private String description;

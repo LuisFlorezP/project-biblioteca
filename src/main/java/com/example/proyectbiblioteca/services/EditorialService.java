@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.PublishingHouse;
+import com.example.proyectbiblioteca.dto.EditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.mappers.PublishingHouseMapper;
 import com.example.proyectbiblioteca.repositories.EditorialRepository;
@@ -19,17 +19,17 @@ public class EditorialService extends GenerateValidation {
     @Autowired
     private PublishingHouseMapper publishingHouseMapper;
 
-    public List<PublishingHouse> getAllEditorial() {
+    public List<EditorialDTO> getAllEditorial() {
         return publishingHouseMapper.toPublishingHouses(editorialRepository.findAll());
     }
 
-    public PublishingHouse getEditorial(Long id) {
+    public EditorialDTO getEditorial(Long id) {
         return editorialRepository.findById(id)
                 .map(editorial -> publishingHouseMapper.toPublishingHouse(editorial))
                 .orElse(null);
     }
 
-    public PublishingHouse saveEditorial(Editorial editorial) {
+    public EditorialDTO saveEditorial(Editorial editorial) {
         Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
         if (editorialNombre.isPresent() || verificarNombre(editorial.getNombre()) || verificarDescripcionEditorial(editorial.getDescripcion())) {
             return null;
@@ -37,7 +37,7 @@ public class EditorialService extends GenerateValidation {
         return publishingHouseMapper.toPublishingHouse(editorialRepository.save(editorial));
     }
 
-    public PublishingHouse updateEditorial(Editorial editorial, Long id) {
+    public EditorialDTO updateEditorial(Editorial editorial, Long id) {
         return  editorialRepository.findById(id)
                 .map(
                         data -> {
