@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.editorial.EditorialDTO;
+import com.example.proyectbiblioteca.dto.editorial.ResponseEditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.services.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +17,22 @@ public class EditorialRestController {
     private EditorialService editorialService;
 
     @GetMapping("/")
-    public ResponseEntity<List<EditorialDTO>> getAllEditorials() {
+    public ResponseEntity<List<ResponseEditorialDTO>> getAllEditorials() {
         return new ResponseEntity<>(editorialService.getAllEditorial(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EditorialDTO> getEditorial(@PathVariable Long id) {
-        EditorialDTO editorialDTO = editorialService.getEditorial(id);
-        if (editorialDTO != null) {
-            return new ResponseEntity<>(editorialDTO, HttpStatus.OK);
+    public ResponseEntity<ResponseEditorialDTO> getEditorial(@PathVariable Long id) {
+        ResponseEditorialDTO responseEditorialDTO = editorialService.getEditorial(id);
+        if (responseEditorialDTO != null) {
+            return new ResponseEntity<>(responseEditorialDTO, HttpStatus.OK);
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/")
-    public ResponseEntity<EditorialDTO> saveEditorial(@RequestBody Editorial editorial) {
-        EditorialDTO data = editorialService.saveEditorial(editorial);
+    public ResponseEntity<ResponseEditorialDTO> saveEditorial(@RequestBody Editorial editorial) {
+        ResponseEditorialDTO data = editorialService.saveEditorial(editorial);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.CREATED);
         }
@@ -40,8 +40,8 @@ public class EditorialRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EditorialDTO> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
-        EditorialDTO data = editorialService.updateEditorial(editorial, id);
+    public ResponseEntity<ResponseEditorialDTO> updateEditorial(@RequestBody Editorial editorial, @PathVariable Long id) {
+        ResponseEditorialDTO data = editorialService.updateEditorial(editorial, id);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }

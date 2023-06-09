@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.editorial.EditorialDTO;
+import com.example.proyectbiblioteca.dto.editorial.ResponseEditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -16,11 +16,11 @@ public interface PublishingHouseMapper {
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description")
     })
-    EditorialDTO toPublishingHouse(Editorial editorial);
-    List<EditorialDTO> toPublishingHouses(List<Editorial> editorials);
+    ResponseEditorialDTO toPublishingHouse(Editorial editorial);
+    List<ResponseEditorialDTO> toPublishingHouses(List<Editorial> editorials);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Editorial toEditorial(EditorialDTO editorialDTO);
-    List<Editorial> toEditorials(List<EditorialDTO> editorialDTOS);
+    Editorial toEditorial(ResponseEditorialDTO responseEditorialDTO);
+    List<Editorial> toEditorials(List<ResponseEditorialDTO> responseEditorialDTOS);
 }
