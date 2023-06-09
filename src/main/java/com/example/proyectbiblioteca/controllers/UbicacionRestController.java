@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.ubicacion.UbicacionDTO;
+import com.example.proyectbiblioteca.dto.ubicacion.ResponseUbicacionDTO;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.services.UbicacionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +18,22 @@ public class UbicacionRestController {
     private UbicacionService ubicacionService;
 
     @GetMapping("/")
-    public ResponseEntity<List<UbicacionDTO>> getAllLocations() {
+    public ResponseEntity<List<ResponseUbicacionDTO>> getAllLocations() {
         return new ResponseEntity<>(ubicacionService.getAllLocations(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UbicacionDTO> getLocation(@PathVariable Long id) {
-        UbicacionDTO ubicacionDTO = ubicacionService.getLocation(id);
-        if (ubicacionDTO != null) {
-            return new ResponseEntity<>(ubicacionDTO, HttpStatus.OK);
+    public ResponseEntity<ResponseUbicacionDTO> getLocation(@PathVariable Long id) {
+        ResponseUbicacionDTO responseUbicacionDTO = ubicacionService.getLocation(id);
+        if (responseUbicacionDTO != null) {
+            return new ResponseEntity<>(responseUbicacionDTO, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/")
-    public ResponseEntity<UbicacionDTO> saveLocation(@RequestBody Ubicacion ubicacion) {
-        UbicacionDTO data = ubicacionService.saveLocation(ubicacion);
+    public ResponseEntity<ResponseUbicacionDTO> saveLocation(@RequestBody Ubicacion ubicacion) {
+        ResponseUbicacionDTO data = ubicacionService.saveLocation(ubicacion);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.CREATED);
         }
@@ -41,8 +41,8 @@ public class UbicacionRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UbicacionDTO> updateLocation(@RequestBody Ubicacion ubicacion, @PathVariable Long id) {
-        UbicacionDTO data = ubicacionService.updateLocation(ubicacion, id);
+    public ResponseEntity<ResponseUbicacionDTO> updateLocation(@RequestBody Ubicacion ubicacion, @PathVariable Long id) {
+        ResponseUbicacionDTO data = ubicacionService.updateLocation(ubicacion, id);
         if (data != null) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }
@@ -50,7 +50,7 @@ public class UbicacionRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UbicacionDTO> deleteLocation(@PathVariable Long id) {
+    public ResponseEntity<ResponseUbicacionDTO> deleteLocation(@PathVariable Long id) {
         if (ubicacionService.deleteLocation(id)) {
             return ResponseEntity.noContent().build();
         }
