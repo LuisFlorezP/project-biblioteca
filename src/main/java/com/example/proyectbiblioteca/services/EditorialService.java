@@ -66,13 +66,10 @@ public class EditorialService extends GenerateValidation {
                 } else if (verificarDescripcionEditorial(editorial.getDescripcion())) {
                     throw new Exception("La editorial debe registrar una descripción válida (hasta 300 caracteres).");
                 }
-                search.map(
-                        data -> {
-                            data.setNombre(editorial.getNombre());
-                            data.setDescripcion(editorial.getDescripcion());
-                            return publishingHouseMapper.toPublishingHouse(editorialRepository.save(data));
-                        }
-                );
+                Editorial data = search.get();
+                data.setNombre(editorial.getNombre());
+                data.setDescripcion(editorial.getDescripcion());
+                return publishingHouseMapper.toPublishingHouse(editorialRepository.save(data));
             }
             throw new Exception("La editorial no ha sido encontrado según el id brindado.");
         } catch (Exception e) {

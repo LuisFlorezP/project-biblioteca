@@ -71,14 +71,13 @@ public class AutorService extends GenerateValidation {
                 } else if (verificarNacionalidad(autor.getNacionalidad())) {
                     throw new Exception("El autor debe registrar una nacionalidad.");
                 }
-                search.map(data -> {
-                    data.setNombre(autor.getNombre());
-                    data.setApellido(autor.getApellido());
-                    data.setPseudonimo(autor.getPseudonimo());
-                    data.setNacionalidad(autor.getNacionalidad());
-                    data.setEmail(autor.getEmail());
-                    return authorMapper.toAuthor(autorRepository.save(data));
-                });
+                Autor data = search.get();
+                data.setNombre(autor.getNombre());
+                data.setApellido(autor.getApellido());
+                data.setPseudonimo(autor.getPseudonimo());
+                data.setNacionalidad(autor.getNacionalidad());
+                data.setEmail(autor.getEmail());
+                return authorMapper.toAuthor(autorRepository.save(data));
             }
             throw new Exception("El autor no ha sido encontrado según el id brindado.");
         } catch (Exception e) {

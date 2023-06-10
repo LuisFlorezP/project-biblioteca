@@ -64,11 +64,10 @@ public class CategoriaService extends GenerateValidation {
                 if (verificarDescripcionCategoria(categoria.getDescripcion().length())) {
                     throw new Exception("La categoria debe registrar una descripción breve (hasta 255 caracteres).");
                 }
-                search.map(data -> {
-                    data.setNombre(categoria.getNombre());
-                    data.setDescripcion(categoria.getDescripcion());
-                    return categoryMapper.toCategory(categoriaRepository.save(data));
-                });
+                Categoria data = search.get();
+                data.setNombre(categoria.getNombre());
+                data.setDescripcion(categoria.getDescripcion());
+                return categoryMapper.toCategory(categoriaRepository.save(data));
             }
             throw new Exception("La categoria no ha sido encontrado según el id brindado.");
         } catch (Exception e) {

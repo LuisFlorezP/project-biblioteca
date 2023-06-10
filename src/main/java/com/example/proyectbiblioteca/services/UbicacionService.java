@@ -63,14 +63,11 @@ public class UbicacionService {
                 } else if (ubicacion.getEstante() == null) {
                     throw new Exception("La ubicación debe registrar un estante.");
                 }
-                search.map(
-                        data -> {
-                            data.setPiso(ubicacion.getPiso());
-                            data.setSalon(ubicacion.getSalon());
-                            data.setEstante(ubicacion.getEstante());
-                            return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
-                        }
-                );
+                Ubicacion data = search.get();
+                data.setPiso(ubicacion.getPiso());
+                data.setSalon(ubicacion.getSalon());
+                data.setEstante(ubicacion.getEstante());
+                return locationMapper.toLocation(data);
             }
             throw new Exception("La ubicación no ha sido encontrado según el id brindado.");
         } catch (Exception e) {
