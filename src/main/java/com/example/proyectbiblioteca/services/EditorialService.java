@@ -4,14 +4,14 @@ import com.example.proyectbiblioteca.dto.editorial.ResponseEditorialDTO;
 import com.example.proyectbiblioteca.entities.Editorial;
 import com.example.proyectbiblioteca.mappers.PublishingHouseMapper;
 import com.example.proyectbiblioteca.repositories.EditorialRepository;
-import com.example.proyectbiblioteca.validations.GenerateValidation;
+import com.example.proyectbiblioteca.validations.EditorialValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EditorialService extends GenerateValidation {
+public class EditorialService extends EditorialValidations {
 
     @Autowired
     private EditorialRepository editorialRepository;
@@ -29,7 +29,7 @@ public class EditorialService extends GenerateValidation {
     public ResponseEditorialDTO getEditorial(Long id) throws Exception {
         try {
             Optional<Editorial> editorial = editorialRepository.findById(id);
-            if (editorial.isPresent()) {
+            if (editorialPresente(editorial)) {
                 return publishingHouseMapper.toPublishingHouse(editorial.get());
             }
             throw new Exception("La editorial no ha sido encontrada.");
@@ -41,7 +41,7 @@ public class EditorialService extends GenerateValidation {
     public ResponseEditorialDTO saveEditorial(Editorial editorial) throws Exception {
         try {
             Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
-            if (editorialNombre.isPresent()) {
+            if (editorialPresente(editorialNombre)) {
                 throw new Exception("La editorial debe registrar un nombre único.");
             } else if (verificarNombre(editorial.getNombre())) {
                 throw new Exception("La editorial debe registrar un nombre válido (entre 2 y 30 caracteres).");
@@ -57,9 +57,9 @@ public class EditorialService extends GenerateValidation {
     public ResponseEditorialDTO updateEditorial(Editorial editorial, Long id) throws Exception {
         try {
             Optional<Editorial> search = editorialRepository.findById(id);
-            if (search.isPresent()) {
+            if (editorialPresente(search)) {
                 Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
-                if (editorialNombre.isPresent() && !editorialNombre.get().getNombre().equals(editorial.getNombre())) {
+                if (nombrePresenteIgualDiferente(editorialNombre, search.get())) {
                     throw new Exception("La editorial debe registrar un nombre único.");
                 } else if (verificarNombre(editorial.getNombre())) {
                     throw new Exception("La editorial debe registrar un nombre válido (entre 2 y 30 caracteres).");
@@ -79,7 +79,7 @@ public class EditorialService extends GenerateValidation {
 
     public void deleteEditorial(Long id) throws Exception {
         try {
-            if (editorialRepository.findById(id).isPresent()) {
+            if (editorialPresente(editorialRepository.findById(id))) {
                 editorialRepository.deleteById(id);
                 return;
             }
