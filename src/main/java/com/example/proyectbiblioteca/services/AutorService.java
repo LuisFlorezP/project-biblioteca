@@ -5,7 +5,6 @@ import com.example.proyectbiblioteca.entities.Autor;
 import com.example.proyectbiblioteca.mappers.AuthorMapper;
 import com.example.proyectbiblioteca.repositories.AutorRepository;
 import com.example.proyectbiblioteca.validations.AutorValidations;
-import com.example.proyectbiblioteca.validations.GenerateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -43,7 +42,7 @@ public class AutorService extends AutorValidations {
     public ResponseAutorDTO saveAutor(Autor autor) throws Exception {
         try {
             Optional<Autor> autorPseudonimo = autorRepository.findByPseudonimo(autor.getPseudonimo());
-            if (pseudonimoPresente(autorPseudonimo)) {
+            if (autorPresente(autorPseudonimo)) {
                 throw new Exception("El autor debe registrar un pseudónimo único.");
             } else if (verificarEmail(autor.getEmail())) {
                 throw new Exception("El autor debe registrar un correo que sea válido.");
