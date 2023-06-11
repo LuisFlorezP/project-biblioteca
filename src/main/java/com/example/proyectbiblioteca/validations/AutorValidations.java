@@ -11,7 +11,7 @@ public class AutorValidations {
         return autor.isPresent();
     }
 
-    public static boolean pseudonimoPresenteIgualDIferente(Optional<Autor> autorPseudonimo, Autor autorId) {
+    public static boolean pseudonimoPresenteIgualDiferente(Optional<Autor> autorPseudonimo, Autor autorId) {
         return autorPresente(autorPseudonimo) && !autorId.getPseudonimo().equals(autorPseudonimo.get().getPseudonimo());
     }
 
