@@ -4,13 +4,14 @@ import com.example.proyectbiblioteca.dto.ubicacion.ResponseUbicacionDTO;
 import com.example.proyectbiblioteca.entities.Ubicacion;
 import com.example.proyectbiblioteca.mappers.LocationMapper;
 import com.example.proyectbiblioteca.repositories.UbicacionRepository;
+import com.example.proyectbiblioteca.validations.UbicacionValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UbicacionService {
+public class UbicacionService extends UbicacionValidations {
 
     @Autowired
     private UbicacionRepository ubicacionRepository;
@@ -28,7 +29,7 @@ public class UbicacionService {
     public ResponseUbicacionDTO getLocation(Long id) throws Exception {
         try {
             Optional<Ubicacion> ubicacion = ubicacionRepository.findById(id);
-            if (ubicacion.isPresent()) {
+            if (ubicacionPresente(ubicacion)) {
                 return locationMapper.toLocation(ubicacion.get());
             }
             throw new Exception("La ubicación no ha sido encontrada.");
@@ -39,11 +40,11 @@ public class UbicacionService {
 
     public ResponseUbicacionDTO saveLocation(Ubicacion ubicacion) throws Exception {
         try {
-            if (ubicacion.getPiso() == null) {
+            if (atributoPresente(ubicacion.getPiso())) {
                 throw new Exception("La ubicación debe registrar un piso.");
-            } else if (ubicacion.getSalon() == null) {
+            } else if (atributoPresente(ubicacion.getSalon())) {
                 throw new Exception("La ubicación debe registrar un salón.");
-            } else if (ubicacion.getEstante() == null) {
+            } else if (atributoPresente(ubicacion.getEstante())) {
                 throw new Exception("La ubicación debe registrar un estante.");
             }
             return locationMapper.toLocation(ubicacionRepository.save(ubicacion));
@@ -55,12 +56,12 @@ public class UbicacionService {
     public ResponseUbicacionDTO updateLocation(Ubicacion ubicacion, Long id) throws Exception {
         try {
             Optional<Ubicacion> search = ubicacionRepository.findById(id);
-            if (search.isPresent()) {
-                if (ubicacion.getPiso() == null) {
+            if (ubicacionPresente(search)) {
+                if (atributoPresente(ubicacion.getPiso())) {
                     throw new Exception("La ubicación debe registrar un piso.");
-                } else if (ubicacion.getSalon() == null) {
+                } else if (atributoPresente(ubicacion.getSalon())) {
                     throw new Exception("La ubicación debe registrar un salón.");
-                } else if (ubicacion.getEstante() == null) {
+                } else if (atributoPresente(ubicacion.getEstante())) {
                     throw new Exception("La ubicación debe registrar un estante.");
                 }
                 Ubicacion data = search.get();
@@ -77,7 +78,7 @@ public class UbicacionService {
 
     public void deleteLocation(Long id) throws Exception {
         try {
-            if (ubicacionRepository.findById(id).isPresent()) {
+            if (ubicacionPresente(ubicacionRepository.findById(id))) {
                 ubicacionRepository.deleteById(id);
                 return;
             }
