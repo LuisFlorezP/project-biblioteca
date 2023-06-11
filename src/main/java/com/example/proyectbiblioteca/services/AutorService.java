@@ -62,7 +62,7 @@ public class AutorService extends AutorValidations {
             Optional<Autor> search = autorRepository.findById(id);
             if (autorPresente(search)) {
                 Optional<Autor> autorPseudonimo = autorRepository.findByPseudonimo(autor.getPseudonimo());
-                if (pseudonimoPresenteIgualDiferente(autorPseudonimo, search.get())) {
+                if (autorPresente(autorPseudonimo) && pseudonimoPresenteIgualDiferente(autorPseudonimo.get(), search.get())) {
                     throw new Exception("El autor debe registrar un pseudónimo único.");
                 } else if (verificarEmail(autor.getEmail())) {
                     throw new Exception("El autor debe registrar un correo que sea válido.");

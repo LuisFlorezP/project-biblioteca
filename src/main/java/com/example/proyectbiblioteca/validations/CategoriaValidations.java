@@ -13,7 +13,7 @@ public class CategoriaValidations {
         return descripcion.length() > 255;
     }
 
-    public static boolean nombrePresenteIgualDiferente(Optional<Categoria> categoriaNombre, Categoria categoriaId) {
-        return categoriaPresente(categoriaNombre) && !categoriaId.getNombre().equals(categoriaNombre.get().getNombre());
+    public static boolean nombrePresenteIgualDiferente(Categoria categoriaNombre, Categoria categoriaId) {
+        return !categoriaId.getNombre().equals(categoriaNombre.getNombre());
     }
 }

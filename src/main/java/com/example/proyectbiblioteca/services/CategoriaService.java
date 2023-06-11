@@ -58,7 +58,7 @@ public class CategoriaService extends CategoriaValidations {
             Optional<Categoria> search = categoriaRepository.findById(id);
             if (categoriaPresente(search)) {
                 Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
-                if (nombrePresenteIgualDiferente(categoriaNombre, search.get())) {
+                if (categoriaPresente(categoriaNombre) && nombrePresenteIgualDiferente(categoriaNombre.get(), search.get())) {
                     throw new Exception("La categoria debe registrar un nombre único.");
                 }
                 if (verificarDescripcionCategoria(categoria.getDescripcion())) {
