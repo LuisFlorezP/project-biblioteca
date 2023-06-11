@@ -46,7 +46,7 @@ public class AutorService extends AutorValidations {
                 throw new Exception("El autor debe registrar un pseudónimo único.");
             } else if (verificarEmail(autor.getEmail())) {
                 throw new Exception("El autor debe registrar un correo que sea válido.");
-            } else if (verificarNombreApellidoPseudonimo(autor.getPseudonimo(), autor.getNombre(), autor.getApellido())) {
+            } else if (verificarNombreApellidoPseudonimo(autor.getNombre(), autor.getApellido(), autor.getPseudonimo())) {
                 throw new Exception("El autor debe registrar nombre y apellido, ó pseudónimo.");
             } else if (verificarNacionalidad(autor.getNacionalidad())) {
                 throw new Exception("El autor debe registrar una nacionalidad.");
@@ -66,7 +66,7 @@ public class AutorService extends AutorValidations {
                     throw new Exception("El autor debe registrar un pseudónimo único.");
                 } else if (verificarEmail(autor.getEmail())) {
                     throw new Exception("El autor debe registrar un correo que sea válido.");
-                } else if (verificarNombreApellidoPseudonimo(autor.getPseudonimo(), autor.getNombre(), autor.getApellido())) {
+                } else if (verificarNombreApellidoPseudonimo(autor.getNombre(), autor.getApellido(), autor.getPseudonimo())) {
                     throw new Exception("El autor debe registrar nombre y apellido, ó pseudónimo.");
                 } else if (verificarNacionalidad(autor.getNacionalidad())) {
                     throw new Exception("El autor debe registrar una nacionalidad.");

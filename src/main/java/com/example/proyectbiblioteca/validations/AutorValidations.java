@@ -23,7 +23,7 @@ public class AutorValidations {
         return !pattern.matcher(email).find();
     }
 
-    public static boolean verificarNombreApellidoPseudonimo(String pseudonimo, String nombre, String apellido) {
+    public static boolean verificarNombreApellidoPseudonimo(String nombre, String apellido, String pseudonimo) {
         if (pseudonimo == null || pseudonimo.isEmpty()) return true;
         else return ((nombre == null || nombre.isEmpty()) && (apellido == null || apellido.isEmpty()));
     }
