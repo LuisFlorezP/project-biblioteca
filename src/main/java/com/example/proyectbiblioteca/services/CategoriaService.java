@@ -40,6 +40,9 @@ public class CategoriaService extends CategoriaValidations {
 
     public ResponseCategoriaDTO saveCategory(Categoria categoria) throws Exception {
         try {
+            if (verificarNombre(categoria.getNombre())) {
+                throw new Exception("La categoria debe registrar un nombre.");
+            }
             Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
             if (categoriaPresente(categoriaNombre)) {
                 throw new Exception("La categoria debe registrar un nombre único.");

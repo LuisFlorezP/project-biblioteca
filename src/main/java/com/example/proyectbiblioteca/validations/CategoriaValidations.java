@@ -9,6 +9,10 @@ public class CategoriaValidations {
         return categoria.isPresent();
     }
 
+    public static boolean verificarNombre(String nombre) {
+        return (nombre == null || nombre.length() == 0);
+    }
+
     public static boolean verificarDescripcionCategoria(String descripcion) {
         return descripcion.length() > 255;
     }
