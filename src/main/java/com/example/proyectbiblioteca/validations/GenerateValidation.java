@@ -6,13 +6,6 @@ import java.util.regex.Pattern;
 
 public class GenerateValidation {
 
-    public static boolean verificarDescripcionCategoria(int longitud) {
-        if (longitud > 255) {
-            return true;
-        }
-        return false;
-    }
-
     public static boolean verificarNombre(String nombre) {
         if (nombre.length() < 2 || nombre.length() > 30) {
             return true;

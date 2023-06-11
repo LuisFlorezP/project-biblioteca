@@ -4,14 +4,14 @@ import com.example.proyectbiblioteca.dto.categoria.ResponseCategoriaDTO;
 import com.example.proyectbiblioteca.entities.Categoria;
 import com.example.proyectbiblioteca.mappers.CategoryMapper;
 import com.example.proyectbiblioteca.repositories.CategoriaRepository;
-import com.example.proyectbiblioteca.validations.GenerateValidation;
+import com.example.proyectbiblioteca.validations.CategoriaValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoriaService extends GenerateValidation {
+public class CategoriaService extends CategoriaValidations {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -29,7 +29,7 @@ public class CategoriaService extends GenerateValidation {
     public ResponseCategoriaDTO getCategory(Long id) throws Exception {
         try {
             Optional<Categoria> categoria = categoriaRepository.findById(id);
-            if (categoria.isPresent()) {
+            if (categoriaPresente(categoria)) {
                 return categoryMapper.toCategory(categoria.get());
             }
             throw new Exception("La categoria no ha sido encontrada.");
@@ -41,10 +41,10 @@ public class CategoriaService extends GenerateValidation {
     public ResponseCategoriaDTO saveCategory(Categoria categoria) throws Exception {
         try {
             Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
-            if (categoriaNombre.isPresent()) {
+            if (categoriaPresente(categoriaNombre)) {
                 throw new Exception("La categoria debe registrar un nombre único.");
             }
-            if (verificarDescripcionCategoria(categoria.getDescripcion().length())) {
+            if (verificarDescripcionCategoria(categoria.getDescripcion())) {
                 throw new Exception("La categoria debe registrar una descripción breve (hasta 255 caracteres).");
             }
             return categoryMapper.toCategory(categoriaRepository.save(categoria));
@@ -56,12 +56,12 @@ public class CategoriaService extends GenerateValidation {
     public ResponseCategoriaDTO updateCategory(Categoria categoria, Long id) throws Exception {
         try {
             Optional<Categoria> search = categoriaRepository.findById(id);
-            if (search.isPresent()) {
+            if (categoriaPresente(search)) {
                 Optional<Categoria> categoriaNombre = categoriaRepository.findByNombre(categoria.getNombre());
-                if (categoriaNombre.isPresent() && !search.get().getNombre().equals(categoria.getNombre())) {
+                if (nombrePresenteIgualDiferente(categoriaNombre, search.get())) {
                     throw new Exception("La categoria debe registrar un nombre único.");
                 }
-                if (verificarDescripcionCategoria(categoria.getDescripcion().length())) {
+                if (verificarDescripcionCategoria(categoria.getDescripcion())) {
                     throw new Exception("La categoria debe registrar una descripción breve (hasta 255 caracteres).");
                 }
                 Categoria data = search.get();
@@ -77,7 +77,7 @@ public class CategoriaService extends GenerateValidation {
 
     public void deleteCategory(Long id) throws Exception {
         try {
-            if (categoriaRepository.findById(id).isPresent()) {
+            if (categoriaPresente(categoriaRepository.findById(id))) {
                 categoriaRepository.deleteById(id);
                 return;
             }
