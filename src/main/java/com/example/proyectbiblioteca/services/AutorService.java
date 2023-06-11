@@ -4,6 +4,7 @@ import com.example.proyectbiblioteca.dto.autor.ResponseAutorDTO;
 import com.example.proyectbiblioteca.entities.Autor;
 import com.example.proyectbiblioteca.mappers.AuthorMapper;
 import com.example.proyectbiblioteca.repositories.AutorRepository;
+import com.example.proyectbiblioteca.validations.AutorValidations;
 import com.example.proyectbiblioteca.validations.GenerateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AutorService extends GenerateValidation {
+public class AutorService extends AutorValidations {
 
     @Autowired
     private AutorRepository autorRepository;
@@ -29,7 +30,7 @@ public class AutorService extends GenerateValidation {
     public ResponseAutorDTO getAutor(Long id) throws Exception {
         try {
             Optional<Autor> autor = autorRepository.findById(id);
-            if (autor.isPresent()) {
+            if (autorPresente(autor)) {
                 return authorMapper.toAuthor(autor.get());
             }
             throw new Exception("El autor no ha sido encontrado.");
@@ -42,11 +43,11 @@ public class AutorService extends GenerateValidation {
     public ResponseAutorDTO saveAutor(Autor autor) throws Exception {
         try {
             Optional<Autor> autorPseudonimo = autorRepository.findByPseudonimo(autor.getPseudonimo());
-            if (autorPseudonimo.isPresent()) {
+            if (pseudonimoPresente(autorPseudonimo)) {
                 throw new Exception("El autor debe registrar un pseudónimo único.");
             } else if (verificarEmail(autor.getEmail())) {
                 throw new Exception("El autor debe registrar un correo que sea válido.");
-            } else if (verificarNombreApellidoPseudonimo(autor)) {
+            } else if (verificarNombreApellidoPseudonimo(autor.getPseudonimo(), autor.getNombre(), autor.getApellido())) {
                 throw new Exception("El autor debe registrar nombre y apellido, ó pseudónimo.");
             } else if (verificarNacionalidad(autor.getNacionalidad())) {
                 throw new Exception("El autor debe registrar una nacionalidad.");
@@ -60,13 +61,13 @@ public class AutorService extends GenerateValidation {
     public ResponseAutorDTO updateAutor(Autor autor, Long id) throws Exception {
         try {
             Optional<Autor> search = autorRepository.findById(id);
-            if (search.isPresent()) {
+            if (autorPresente(search)) {
                 Optional<Autor> autorPseudonimo = autorRepository.findByPseudonimo(autor.getPseudonimo());
-                if (autorPseudonimo.isPresent() && !search.get().getPseudonimo().equals(autor.getPseudonimo())) {
+                if (pseudonimoPresenteIgualDIferente(autorPseudonimo, search.get())) {
                     throw new Exception("El autor debe registrar un pseudónimo único.");
                 } else if (verificarEmail(autor.getEmail())) {
                     throw new Exception("El autor debe registrar un correo que sea válido.");
-                } else if (verificarNombreApellidoPseudonimo(autor)) {
+                } else if (verificarNombreApellidoPseudonimo(autor.getPseudonimo(), autor.getNombre(), autor.getApellido())) {
                     throw new Exception("El autor debe registrar nombre y apellido, ó pseudónimo.");
                 } else if (verificarNacionalidad(autor.getNacionalidad())) {
                     throw new Exception("El autor debe registrar una nacionalidad.");
@@ -87,7 +88,7 @@ public class AutorService extends GenerateValidation {
 
     public void deleteAutor(Long id) throws Exception {
         try {
-            if (autorRepository.findById(id).isPresent()) {
+            if (autorPresente(autorRepository.findById(id))) {
                 autorRepository.deleteById(id);
                 return;
             }
