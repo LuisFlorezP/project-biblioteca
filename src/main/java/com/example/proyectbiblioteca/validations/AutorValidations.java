@@ -25,7 +25,7 @@ public class AutorValidations {
 
     public static boolean verificarNombreApellidoPseudonimo(String pseudonimo, String nombre, String apellido) {
         if (pseudonimo == null || pseudonimo.isEmpty()) return true;
-        else return (nombre == null && apellido == null);
+        else return ((nombre == null || nombre.isEmpty()) && (apellido == null || apellido.isEmpty()));
     }
 
     public static boolean verificarNacionalidad(Pais pais) {
