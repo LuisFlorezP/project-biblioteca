@@ -11,6 +11,10 @@ public class AutorValidations {
         return autor.isPresent();
     }
 
+    public static boolean verificarPseudonimo(String pseudonimo) {
+        return (pseudonimo == null || pseudonimo.length() == 0);
+    }
+
     public static boolean pseudonimoPresenteIgualDiferente(Autor autorPseudonimo, Autor autorId) {
         return !autorId.getPseudonimo().equals(autorPseudonimo.getPseudonimo());
     }

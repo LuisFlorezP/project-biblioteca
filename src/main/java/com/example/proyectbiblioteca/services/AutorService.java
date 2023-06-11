@@ -41,6 +41,9 @@ public class AutorService extends AutorValidations {
 
     public ResponseAutorDTO saveAutor(Autor autor) throws Exception {
         try {
+            if (verificarPseudonimo(autor.getPseudonimo())) {
+                throw new Exception("El autor debe registrar un pseudónimo.");
+            }
             Optional<Autor> autorPseudonimo = autorRepository.findByPseudonimo(autor.getPseudonimo());
             if (autorPresente(autorPseudonimo)) {
                 throw new Exception("El autor debe registrar un pseudónimo único.");
