@@ -40,7 +40,7 @@ public class AutorService extends AutorValidations {
 
     }
 
-    public ResponseAutorDTO saveAutor(DataAutorDTO autor) throws Exception {
+    public DataAutorDTO saveAutor(DataAutorDTO autor) throws Exception {
         try {
             if (verificarPseudonimo(autor.getPseudonimo())) {
                 throw new Exception("El autor debe registrar un pseudónimo.");
@@ -55,13 +55,13 @@ public class AutorService extends AutorValidations {
             } else if (verificarNacionalidad(autor.getIdNacionalidad())) {
                 throw new Exception("El autor debe registrar una nacionalidad.");
             }
-            return authorMapper.toAuthor(autorRepository.save(authorMapper.toAutorData(autor)));
+            return authorMapper.toDataAuthor(autorRepository.save(authorMapper.toAutorData(autor)));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    public ResponseAutorDTO updateAutor(DataAutorDTO autor, Long id) throws Exception {
+    public DataAutorDTO updateAutor(DataAutorDTO autor, Long id) throws Exception {
         try {
             Optional<Autor> search = autorRepository.findById(id);
             if (autorPresente(search)) {
@@ -82,7 +82,7 @@ public class AutorService extends AutorValidations {
                 data.setPseudonimo(save.getPseudonimo());
                 data.setNacionalidad(save.getNacionalidad());
                 data.setEmail(save.getEmail());
-                return authorMapper.toAuthor(autorRepository.save(data));
+                return authorMapper.toDataAuthor(autorRepository.save(data));
             }
             throw new Exception("El autor no ha sido encontrado según el id brindado.");
         } catch (Exception e) {
