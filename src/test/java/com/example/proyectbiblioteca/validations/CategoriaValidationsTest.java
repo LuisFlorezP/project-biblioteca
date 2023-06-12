@@ -34,6 +34,11 @@ public class CategoriaValidationsTest {
 
     @Test
     public void verificarDescripcionCategoria_valido_menos_de_256_caracteres() {
+        assertFalse(CategoriaValidations.verificarDescripcionCategoria("aaaaaaaaaaaaaaaaaaaaaa"));
+    }
+
+    @Test
+    public void verificarDescripcionCategoria_valido_de_255_caracteres() {
         assertFalse(CategoriaValidations.verificarDescripcionCategoria("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
     }
 
