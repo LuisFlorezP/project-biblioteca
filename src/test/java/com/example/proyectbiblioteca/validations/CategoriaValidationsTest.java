@@ -58,12 +58,12 @@ public class CategoriaValidationsTest {
     }
 
     @Test
-    public void verificarDescripcionCategoria() {
+    public void nombrePresenteIgualDiferente_igual() {
         assertFalse(CategoriaValidations.nombrePresenteIgualDiferente("test", "test"));
     }
 
     @Test
-    public void nombrePresenteIgualDiferente() {
+    public void nombrePresenteIgualDiferente_diferente() {
         assertTrue(CategoriaValidations.nombrePresenteIgualDiferente("test", "no_test"));
     }
 }
