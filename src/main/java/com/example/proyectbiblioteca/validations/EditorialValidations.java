@@ -14,7 +14,7 @@ public class EditorialValidations {
     }
 
     public static boolean verificarDescripcionEditorial(String descripcion) {
-        return descripcion.length() > 300;
+        return descripcion == null || descripcion.length() > 300;
     }
 
     public static boolean nombrePresenteIgualDiferente(String editorialNombre, String editorialId) {
