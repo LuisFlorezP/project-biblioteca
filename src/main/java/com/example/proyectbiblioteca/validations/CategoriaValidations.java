@@ -14,7 +14,7 @@ public class CategoriaValidations {
     }
 
     public static boolean verificarDescripcionCategoria(String descripcion) {
-        return descripcion.length() > 255;
+        return descripcion == null || descripcion.length() > 255;
     }
 
     public static boolean nombrePresenteIgualDiferente(String categoriaNombre, String categoriaId) {
