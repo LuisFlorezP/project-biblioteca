@@ -17,7 +17,7 @@ public class EditorialValidations {
         return descripcion.length() > 300;
     }
 
-    public static boolean nombrePresenteIgualDiferente(Editorial editorialNombre, Editorial editorialId) {
-        return !editorialId.getNombre().equals(editorialNombre.getNombre());
+    public static boolean nombrePresenteIgualDiferente(String editorialNombre, String editorialId) {
+        return !editorialId.equals(editorialNombre);
     }
 }

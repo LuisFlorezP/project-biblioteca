@@ -59,7 +59,7 @@ public class EditorialService extends EditorialValidations {
             Optional<Editorial> search = editorialRepository.findById(id);
             if (editorialPresente(search)) {
                 Optional<Editorial> editorialNombre = editorialRepository.findByNombre(editorial.getNombre());
-                if (editorialPresente(editorialNombre) && nombrePresenteIgualDiferente(editorialNombre.get(), search.get())) {
+                if (editorialPresente(editorialNombre) && nombrePresenteIgualDiferente(editorialNombre.get().getNombre(), search.get().getNombre())) {
                     throw new Exception("La editorial debe registrar un nombre único.");
                 } else if (verificarNombre(editorial.getNombre())) {
                     throw new Exception("La editorial debe registrar un nombre válido (entre 2 y 30 caracteres).");
