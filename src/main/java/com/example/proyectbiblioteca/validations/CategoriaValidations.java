@@ -17,7 +17,7 @@ public class CategoriaValidations {
         return descripcion.length() > 255;
     }
 
-    public static boolean nombrePresenteIgualDiferente(Categoria categoriaNombre, Categoria categoriaId) {
-        return !categoriaId.getNombre().equals(categoriaNombre.getNombre());
+    public static boolean nombrePresenteIgualDiferente(String categoriaNombre, String categoriaId) {
+        return !categoriaId.equals(categoriaNombre);
     }
 }
