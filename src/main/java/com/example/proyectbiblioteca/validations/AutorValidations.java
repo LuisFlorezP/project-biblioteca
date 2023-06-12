@@ -31,9 +31,7 @@ public class AutorValidations {
         return (pseudonimo == null && (nombre == null || apellido == null));
     }
 
-    public static boolean verificarNacionalidad(Pais pais) {
-        if (pais == null) {
-            return true;
-        } else return pais.getId() == null;
+    public static boolean verificarNacionalidad(Long idPais) {
+        return idPais == null;
     }
 }

@@ -136,18 +136,11 @@ public class AutorValidationsTest {
 
     @Test
     public void verificarNacionalidad_valida() {
-        Pais pais = new Pais();
-        pais.setId(1L);
-        assertFalse(AutorValidations.verificarNacionalidad(pais));
+        assertFalse(AutorValidations.verificarNacionalidad(1L));
     }
 
     @Test
     public void verificarNacionalidad_pais_nulo() {
         assertTrue(AutorValidations.verificarNacionalidad(null));
-    }
-
-    @Test
-    public void verificarNacionalidad_NO_idPais() {
-        assertTrue(AutorValidations.verificarNacionalidad(new Pais()));
     }
 }
