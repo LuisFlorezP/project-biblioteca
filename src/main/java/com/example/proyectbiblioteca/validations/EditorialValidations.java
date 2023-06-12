@@ -10,7 +10,7 @@ public class EditorialValidations {
     }
 
     public static boolean verificarNombre(String nombre) {
-        return nombre.length() < 2 || nombre.length() > 30;
+        return nombre == null || nombre.length() < 2 || nombre.length() > 30;
     }
 
     public static boolean verificarDescripcionEditorial(String descripcion) {
