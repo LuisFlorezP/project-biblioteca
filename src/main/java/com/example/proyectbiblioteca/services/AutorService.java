@@ -1,5 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
+import com.example.proyectbiblioteca.dto.autor.DataAutorDTO;
 import com.example.proyectbiblioteca.dto.autor.ResponseAutorDTO;
 import com.example.proyectbiblioteca.entities.Autor;
 import com.example.proyectbiblioteca.mappers.AuthorMapper;
@@ -39,7 +40,7 @@ public class AutorService extends AutorValidations {
 
     }
 
-    public ResponseAutorDTO saveAutor(Autor autor) throws Exception {
+    public ResponseAutorDTO saveAutor(DataAutorDTO autor) throws Exception {
         try {
             if (verificarPseudonimo(autor.getPseudonimo())) {
                 throw new Exception("El autor debe registrar un pseudónimo.");
@@ -51,16 +52,16 @@ public class AutorService extends AutorValidations {
                 throw new Exception("El autor debe registrar un correo que sea válido.");
             } else if (verificarNombreApellidoPseudonimo(autor.getNombre(), autor.getApellido(), autor.getPseudonimo())) {
                 throw new Exception("El autor debe registrar nombre y apellido, ó pseudónimo.");
-            } else if (verificarNacionalidad(autor.getNacionalidad())) {
+            } else if (verificarNacionalidad(autor.getIdNacionalidad())) {
                 throw new Exception("El autor debe registrar una nacionalidad.");
             }
-            return authorMapper.toAuthor(autorRepository.save(autor));
+            return authorMapper.toAuthor(autorRepository.save(authorMapper.toAutorData(autor)));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    public ResponseAutorDTO updateAutor(Autor autor, Long id) throws Exception {
+    public ResponseAutorDTO updateAutor(DataAutorDTO autor, Long id) throws Exception {
         try {
             Optional<Autor> search = autorRepository.findById(id);
             if (autorPresente(search)) {
@@ -71,15 +72,16 @@ public class AutorService extends AutorValidations {
                     throw new Exception("El autor debe registrar un correo que sea válido.");
                 } else if (verificarNombreApellidoPseudonimo(autor.getNombre(), autor.getApellido(), autor.getPseudonimo())) {
                     throw new Exception("El autor debe registrar nombre y apellido, ó pseudónimo.");
-                } else if (verificarNacionalidad(autor.getNacionalidad())) {
+                } else if (verificarNacionalidad(autor.getIdNacionalidad())) {
                     throw new Exception("El autor debe registrar una nacionalidad.");
                 }
+                Autor save = authorMapper.toAutorData(autor);
                 Autor data = search.get();
-                data.setNombre(autor.getNombre());
-                data.setApellido(autor.getApellido());
-                data.setPseudonimo(autor.getPseudonimo());
-                data.setNacionalidad(autor.getNacionalidad());
-                data.setEmail(autor.getEmail());
+                data.setNombre(save.getNombre());
+                data.setApellido(save.getApellido());
+                data.setPseudonimo(save.getPseudonimo());
+                data.setNacionalidad(save.getNacionalidad());
+                data.setEmail(save.getEmail());
                 return authorMapper.toAuthor(autorRepository.save(data));
             }
             throw new Exception("El autor no ha sido encontrado según el id brindado.");

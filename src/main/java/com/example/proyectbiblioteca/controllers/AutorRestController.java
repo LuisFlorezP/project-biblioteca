@@ -1,6 +1,7 @@
 package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.dto.autor.AutorDTO;
+import com.example.proyectbiblioteca.dto.autor.DataAutorDTO;
 import com.example.proyectbiblioteca.dto.autor.ErrorAutorDTO;
 import com.example.proyectbiblioteca.entities.Autor;
 import com.example.proyectbiblioteca.services.AutorService;
@@ -40,7 +41,7 @@ public class AutorRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<AutorDTO> saveAutor(@RequestBody Autor autor) {
+    public ResponseEntity<AutorDTO> saveAutor(@RequestBody DataAutorDTO autor) {
         try {
             return new ResponseEntity<>(autorService.saveAutor(autor), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -49,7 +50,7 @@ public class AutorRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AutorDTO> updateAutor(@RequestBody Autor autor, @PathVariable Long id) {
+    public ResponseEntity<AutorDTO> updateAutor(@RequestBody DataAutorDTO autor, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(autorService.updateAutor(autor, id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
