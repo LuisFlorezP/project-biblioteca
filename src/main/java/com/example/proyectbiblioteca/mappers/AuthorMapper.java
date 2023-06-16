@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.autor.DataAutorDTO;
+import com.example.proyectbiblioteca.dto.autor.RequestAutorDTO;
 import com.example.proyectbiblioteca.dto.autor.ResponseAutorDTO;
 import com.example.proyectbiblioteca.entities.Autor;
 import org.mapstruct.InheritInverseConfiguration;
@@ -8,7 +8,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -29,11 +28,11 @@ public interface AuthorMapper {
     List<Autor> toAutors(List<ResponseAutorDTO> responseAutorDTOS);
 
     @Mapping(source = "nacionalidad.id", target = "idNacionalidad")
-    DataAutorDTO toDataAuthor(Autor autor);
-    List<DataAutorDTO> toDataAuthors(List<Autor> autors);
+    RequestAutorDTO toDataAuthor(Autor autor);
+    List<RequestAutorDTO> toDataAuthors(List<Autor> autors);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Autor toAutorData(DataAutorDTO dataAutorDTO);
-    List<Autor> toAutorsData(List<DataAutorDTO> dataAutorDTOS);
+    Autor toAutorData(RequestAutorDTO requestAutorDTO);
+    List<Autor> toAutorsData(List<RequestAutorDTO> requestAutorDTOS);
 }

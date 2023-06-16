@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.dto.autor;
 
-public class DataAutorDTO extends AutorDTO {
+public class RequestAutorDTO extends AutorDTO {
 
     private String nombre;
     private String apellido;
