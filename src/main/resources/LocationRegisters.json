@@ -1,0 +1,27 @@
+[
+  {
+    "piso": "2",
+    "salon": "K-201",
+    "estante": "17"
+  },
+  {
+    "piso": "1",
+    "salon": "N-400",
+    "estante": "1"
+  },
+  {
+    "piso": "2",
+    "salon": "M-111",
+    "estante": "20"
+  },
+  {
+    "piso": "4",
+    "salon": "L-177",
+    "estante": "3"
+  },
+  {
+    "piso": "3",
+    "salon": "M-222",
+    "estante": "2"
+  }
+]

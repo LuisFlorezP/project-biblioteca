@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Alfaomega Colombiana",
+    "descripcion": "Editorial ubicada en Colombia que posee más de 30 años de experiencia en el sector literario del país. Desde su fundación se ha dedicado a brindarle a la población de habla hispana material didáctico con temáticas sobre las distintas ciencias, inclinándose especialmente en el área de la tecnología."
+  },
+  {
+    "nombre": "Angosta Editores",
+    "descripcion": "Faciolince, originario de Antioquia, Colombia. Angosta se creó como una propuesta dirigida a aquellos autores colombianos que permanecen ocultos por causa del rechazo de otras grandes editoriales."
+  },
+  {
+    "nombre": "Babel Libros",
+    "descripcion": "También es una de las casas de edición que más recibe a nuevos autores e ilustradores. Como compañía, se creó con el objeto de fomentar la lectura en Colombia, especialmente en los más pequeños."
+  },
+  {
+    "nombre": "Calixta Editores",
+    "descripcion": "Esta empresa, más allá de vender, se ha propuesto revolucionar la cultura literaria de Colombia, y cambiar por completo la percepción que tienen de esta los habitantes del país."
+  },
+  {
+    "nombre": "Cangrejo Editores",
+    "descripcion": "Casa editorial originaria de Colombia que actualmente se encuentra esparcida por toda América Latina. No ha sido fácil para ellos tener el alcance que poco a poco han ido construyendo, esto debido al bajo porcentaje de lectores existentes en muchos de los países latinos."
+  }
+]
