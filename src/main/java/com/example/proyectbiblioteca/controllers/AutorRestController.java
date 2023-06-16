@@ -1,9 +1,9 @@
 package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.dto.autor.AutorDTO;
-import com.example.proyectbiblioteca.dto.autor.DataAutorDTO;
+import com.example.proyectbiblioteca.dto.autor.RequestAutorDTO;
 import com.example.proyectbiblioteca.dto.autor.ErrorAutorDTO;
-import com.example.proyectbiblioteca.entities.Autor;
+import com.example.proyectbiblioteca.mappers.AuthorMapper;
 import com.example.proyectbiblioteca.services.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +19,8 @@ public class AutorRestController {
 
     @Autowired
     private AutorService autorService;
+    @Autowired
+    private AuthorMapper authorMapper;
 
     @GetMapping("/")
     public ResponseEntity<List<AutorDTO>> getAllAutors() {
@@ -41,18 +43,18 @@ public class AutorRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<AutorDTO> saveAutor(@RequestBody DataAutorDTO autor) {
+    public ResponseEntity<AutorDTO> saveAutor(@RequestBody RequestAutorDTO autor) {
         try {
-            return new ResponseEntity<>(autorService.saveAutor(autor), HttpStatus.CREATED);
+            return new ResponseEntity<>(autorService.saveAutor(authorMapper.toAutorData(autor)), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorAutorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AutorDTO> updateAutor(@RequestBody DataAutorDTO autor, @PathVariable Long id) {
+    public ResponseEntity<AutorDTO> updateAutor(@RequestBody RequestAutorDTO autor, @PathVariable Long id) {
         try {
-            return new ResponseEntity<>(autorService.updateAutor(autor, id), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(autorService.updateAutor(authorMapper.toAutorData(autor), id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorAutorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
