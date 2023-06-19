@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class AuthorRestController {
                 content = @Content)
     })
     @GetMapping("/")
-    public ResponseEntity<List<AuthorDTO>> getAllAutors() {
+    public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
         try {
             return ResponseEntity.ok(new ArrayList<>(service.getAllAuthors()));
         } catch (Exception e) {
@@ -71,7 +70,7 @@ public class AuthorRestController {
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<AuthorDTO> getAutor(@PathVariable Long id) {
+    public ResponseEntity<AuthorDTO> getAuthor(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(service.getAuthor(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -96,7 +95,7 @@ public class AuthorRestController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<AuthorDTO> saveAutor(@RequestBody RequestAuthorDTO author) {
+    public ResponseEntity<AuthorDTO> saveAuthor(@RequestBody RequestAuthorDTO author) {
         try {
             return new ResponseEntity<>(service.saveAuthor(mapper.requestAuthorDtoToAuthor(author)), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -121,7 +120,7 @@ public class AuthorRestController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<AuthorDTO> updateAutor(@RequestBody RequestAuthorDTO author, @PathVariable Long id) {
+    public ResponseEntity<AuthorDTO> updateAuthor(@RequestBody RequestAuthorDTO author, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(service.updateAuthor(mapper.requestAuthorDtoToAuthor(author), id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -141,7 +140,7 @@ public class AuthorRestController {
                     content = @Content)
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<AuthorDTO> deleteAutor(@PathVariable Long id) {
+    public ResponseEntity<AuthorDTO> deleteAuthor(@PathVariable Long id) {
         try {
             service.deleteAuthor(id);
             return ResponseEntity.noContent().build();
