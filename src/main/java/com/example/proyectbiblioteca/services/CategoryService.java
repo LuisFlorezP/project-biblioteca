@@ -1,5 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
+import com.example.proyectbiblioteca.dto.categoria.RequestCategoryDTO;
 import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
 import com.example.proyectbiblioteca.entities.Category;
 import com.example.proyectbiblioteca.mappers.CategoryMapper;
@@ -38,7 +39,7 @@ public class CategoryService extends CategoryValidations {
         }
     }
 
-    public ResponseCategoryDTO saveCategory(Category category) throws Exception {
+    public RequestCategoryDTO saveCategory(Category category) throws Exception {
         try {
             if (verifyNombre(category.getNombre())) {
                 throw new Exception("The category must register name.");
@@ -50,13 +51,13 @@ public class CategoryService extends CategoryValidations {
             if (verifyDescripcionCategory(category.getDescripcion())) {
                 throw new Exception("The category must register brief description (until 255 characters).");
             }
-            return mapper.categoryToResponseCategoryDto(repository.save(category));
+            return mapper.categoryToRequestCategoryDto(repository.save(category));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    public ResponseCategoryDTO updateCategory(Category category, Long id) throws Exception {
+    public RequestCategoryDTO updateCategory(Category category, Long id) throws Exception {
         try {
             Optional<Category> search = repository.findById(id);
             if (categoryPresent(search)) {
@@ -70,7 +71,7 @@ public class CategoryService extends CategoryValidations {
                 Category data = search.get();
                 data.setNombre(category.getNombre());
                 data.setDescripcion(category.getDescripcion());
-                return mapper.categoryToResponseCategoryDto(repository.save(data));
+                return mapper.categoryToRequestCategoryDto(repository.save(data));
             }
             throw new Exception("The Category entity record was not found.");
         } catch (Exception e) {

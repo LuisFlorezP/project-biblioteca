@@ -2,8 +2,9 @@ package com.example.proyectbiblioteca.controllers;
 
 import com.example.proyectbiblioteca.dto.categoria.CategoryDTO;
 import com.example.proyectbiblioteca.dto.categoria.ErrorCategoryDTO;
+import com.example.proyectbiblioteca.dto.categoria.RequestCategoryDTO;
 import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
-import com.example.proyectbiblioteca.entities.Category;
+import com.example.proyectbiblioteca.mappers.CategoryMapper;
 import com.example.proyectbiblioteca.services.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +26,8 @@ public class CategoryRestController {
 
     @Autowired
     private CategoryService service;
+    @Autowired
+    private CategoryMapper mapper;
 
     @Operation(summary = "Read all categories stored in database.")
     @ApiResponses(value = {
@@ -93,9 +96,9 @@ public class CategoryRestController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<CategoryDTO> saveCategory(@RequestBody Category category) {
+    public ResponseEntity<CategoryDTO> saveCategory(@RequestBody RequestCategoryDTO category) {
         try {
-            return new ResponseEntity<>(service.saveCategory(category), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.saveCategory(mapper.requestCategoryDtoToCategory(category)), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorCategoryDTO("The Category entered has not been created and saved: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -118,9 +121,9 @@ public class CategoryRestController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDTO> updateCategory(@RequestBody Category category, @PathVariable Long id) {
+    public ResponseEntity<CategoryDTO> updateCategory(@RequestBody RequestCategoryDTO category, @PathVariable Long id) {
         try {
-            return new ResponseEntity<>(service.updateCategory(category, id), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(service.updateCategory(mapper.requestCategoryDtoToCategory(category), id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorCategoryDTO("The Category entered has not been updated and saved: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
