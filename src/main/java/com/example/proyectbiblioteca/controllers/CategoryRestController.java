@@ -87,7 +87,7 @@ public class CategoryRestController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ResponseCategoryDTO.class))
+                                    schema = @Schema(implementation = RequestCategoryDTO.class))
                     }
             ),
             @ApiResponse(
@@ -112,7 +112,7 @@ public class CategoryRestController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ResponseCategoryDTO.class))
+                                    schema = @Schema(implementation = RequestCategoryDTO.class))
                     }
             ),
             @ApiResponse(
