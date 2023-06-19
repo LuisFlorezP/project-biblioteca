@@ -1,16 +1,14 @@
 package com.example.proyectbiblioteca.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.validation.annotation.Validated;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "editorial_entity")
-public class Editorial {
+@Table(name = "publishing_house_entity")
+public class PublishingHouse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

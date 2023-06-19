@@ -1,10 +1,10 @@
 package com.example.proyectbiblioteca.dto.editorial;
 
-public class ErrorEditorialDTO extends EditorialDTO {
+public class ErrorPublishingHouseDTO extends PublishingHouseDTO {
 
     private String error;
 
-    public ErrorEditorialDTO(String error) {
+    public ErrorPublishingHouseDTO(String error) {
         this.error = error;
     }
 

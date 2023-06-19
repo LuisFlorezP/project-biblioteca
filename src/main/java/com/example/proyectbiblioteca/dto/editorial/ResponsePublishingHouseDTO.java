@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.dto.editorial;
 
-public class ResponseEditorialDTO extends EditorialDTO {
+public class ResponsePublishingHouseDTO extends PublishingHouseDTO {
 
     private String name;
     private String description;

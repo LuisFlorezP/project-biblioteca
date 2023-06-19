@@ -1,12 +1,11 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.editorial.ResponseEditorialDTO;
-import com.example.proyectbiblioteca.entities.Editorial;
+import com.example.proyectbiblioteca.dto.editorial.ResponsePublishingHouseDTO;
+import com.example.proyectbiblioteca.entities.PublishingHouse;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -16,11 +15,11 @@ public interface PublishingHouseMapper {
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description")
     })
-    ResponseEditorialDTO toPublishingHouse(Editorial editorial);
-    List<ResponseEditorialDTO> toPublishingHouses(List<Editorial> editorials);
+    ResponsePublishingHouseDTO publishingHouseToResponsePublishingHouseDto(PublishingHouse publishingHouse);
+    List<ResponsePublishingHouseDTO> publishingHousesToResponsePublishingHousesDtos(List<PublishingHouse> publishingHouses);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Editorial toEditorial(ResponseEditorialDTO responseEditorialDTO);
-    List<Editorial> toEditorials(List<ResponseEditorialDTO> responseEditorialDTOS);
+    PublishingHouse responsePublishingHouseDtoToPublishingHouse(ResponsePublishingHouseDTO responsePublishingHouseDTO);
+    List<PublishingHouse> responsePublishingHousesDtosToPublishingHouses(List<ResponsePublishingHouseDTO> responsePublishingHouseDTOS);
 }

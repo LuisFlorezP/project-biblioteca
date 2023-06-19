@@ -1,4 +1,4 @@
 package com.example.proyectbiblioteca.dto.editorial;
 
-public class EditorialDTO {
+public class PublishingHouseDTO {
 }
