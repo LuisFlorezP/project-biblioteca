@@ -3,36 +3,28 @@
     "nombre": "William",
     "apellido": "Faulkner",
     "pseudonimo": "El caballero cariñoso",
-    "nacionalidad": {
-      "id": 11
-    },
+    "idNacionalidad": 11,
     "email": "william@gmail.com"
   },
   {
     "nombre": "Gabriel",
     "apellido": "García Márquez",
     "pseudonimo": "Gabo y Gabito",
-    "nacionalidad": {
-      "id": 15
-    },
+    "idNacionalidad": 15,
     "email": "gabrielito@hotmail.com"
   },
   {
     "nombre": "Ricardo Eliécer",
     "apellido": "Neftalí Reyes Basoalto",
     "pseudonimo": "Pablo Neruda",
-    "nacionalidad": {
-      "id": 9
-    },
+    "idNacionalidad": 9,
     "email": "ricardito@hotmail.com"
   },
   {
     "nombre": "Mario",
     "apellido": "Vargas Llosa",
     "pseudonimo": "Sartrecillo",
-    "nacionalidad": {
-      "id": 3
-    },
+    "idNacionalidad": 3,
     "email": "mariollosa@gmail.com"
   }
 ]
