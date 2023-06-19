@@ -87,7 +87,7 @@ public class PublishingHouseRestController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ResponsePublishingHouseDTO.class))
+                                    schema = @Schema(implementation = RequestPublishingHouseDTO.class))
                     }
             ),
             @ApiResponse(
@@ -112,7 +112,7 @@ public class PublishingHouseRestController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ResponsePublishingHouseDTO.class))
+                                    schema = @Schema(implementation = RequestPublishingHouseDTO.class))
                     }
             ),
             @ApiResponse(
