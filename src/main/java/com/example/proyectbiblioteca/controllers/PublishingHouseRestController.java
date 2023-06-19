@@ -3,8 +3,10 @@ package com.example.proyectbiblioteca.controllers;
 import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
 import com.example.proyectbiblioteca.dto.editorial.ErrorPublishingHouseDTO;
 import com.example.proyectbiblioteca.dto.editorial.PublishingHouseDTO;
+import com.example.proyectbiblioteca.dto.editorial.RequestPublishingHouseDTO;
 import com.example.proyectbiblioteca.dto.editorial.ResponsePublishingHouseDTO;
 import com.example.proyectbiblioteca.entities.PublishingHouse;
+import com.example.proyectbiblioteca.mappers.PublishingHouseMapper;
 import com.example.proyectbiblioteca.services.PublishingHouseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,6 +28,8 @@ public class PublishingHouseRestController {
 
     @Autowired
     private PublishingHouseService service;
+    @Autowired
+    private PublishingHouseMapper mapper;
 
     @Operation(summary = "Read all publishing houses stored in database.")
     @ApiResponses(value = {
@@ -94,9 +98,9 @@ public class PublishingHouseRestController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<PublishingHouseDTO> savePublishingHouse(@RequestBody PublishingHouse publishingHouse) {
+    public ResponseEntity<PublishingHouseDTO> savePublishingHouse(@RequestBody RequestPublishingHouseDTO publishingHouse) {
         try {
-            return new ResponseEntity<>(service.savePublishingHouse(publishingHouse), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.savePublishingHouse(mapper.requestPublishingHouseDtoToPublishingHouse(publishingHouse)), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorPublishingHouseDTO("The PublishingHouse entered has not been created and saved: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -119,9 +123,9 @@ public class PublishingHouseRestController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<PublishingHouseDTO> updatePublishingHouse(@RequestBody PublishingHouse publishingHouse, @PathVariable Long id) {
+    public ResponseEntity<PublishingHouseDTO> updatePublishingHouse(@RequestBody RequestPublishingHouseDTO publishingHouse, @PathVariable Long id) {
         try {
-            return new ResponseEntity<>(service.updatePublishingHouse(publishingHouse, id), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(service.updatePublishingHouse(mapper.requestPublishingHouseDtoToPublishingHouse(publishingHouse), id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorPublishingHouseDTO("The PublishingHouse entered has not been updated and saved: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }

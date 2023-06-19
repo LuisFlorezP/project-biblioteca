@@ -1,5 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
+import com.example.proyectbiblioteca.dto.editorial.RequestPublishingHouseDTO;
 import com.example.proyectbiblioteca.dto.editorial.ResponsePublishingHouseDTO;
 import com.example.proyectbiblioteca.entities.PublishingHouse;
 import com.example.proyectbiblioteca.mappers.PublishingHouseMapper;
@@ -38,7 +39,7 @@ public class PublishingHouseService extends PublishingHouseValidations {
         }
     }
 
-    public ResponsePublishingHouseDTO savePublishingHouse(PublishingHouse publishingHouse) throws Exception {
+    public RequestPublishingHouseDTO savePublishingHouse(PublishingHouse publishingHouse) throws Exception {
         try {
             Optional<PublishingHouse> publishingHouseNombre = repository.findByNombre(publishingHouse.getNombre());
             if (publishingHousePresent(publishingHouseNombre)) {
@@ -48,13 +49,13 @@ public class PublishingHouseService extends PublishingHouseValidations {
             } else if (verifyDescripcionEditorial(publishingHouse.getDescripcion())) {
                 throw new Exception("The category must register valid description (until 300 characters).");
             }
-            return mapper.publishingHouseToResponsePublishingHouseDto(repository.save(publishingHouse));
+            return mapper.publishingHouseToRequestPublishingHouseDto(repository.save(publishingHouse));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    public ResponsePublishingHouseDTO updatePublishingHouse(PublishingHouse publishingHouse, Long id) throws Exception {
+    public RequestPublishingHouseDTO updatePublishingHouse(PublishingHouse publishingHouse, Long id) throws Exception {
         try {
             Optional<PublishingHouse> search = repository.findById(id);
             if (publishingHousePresent(search)) {
@@ -69,7 +70,7 @@ public class PublishingHouseService extends PublishingHouseValidations {
                 PublishingHouse data = search.get();
                 data.setNombre(publishingHouse.getNombre());
                 data.setDescripcion(publishingHouse.getDescripcion());
-                return mapper.publishingHouseToResponsePublishingHouseDto(repository.save(data));
+                return mapper.publishingHouseToRequestPublishingHouseDto(repository.save(data));
             }
             throw new Exception("The PublishingHouse entity record was not found.");
         } catch (Exception e) {
