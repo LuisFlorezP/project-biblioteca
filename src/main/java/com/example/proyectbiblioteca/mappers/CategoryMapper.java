@@ -28,6 +28,7 @@ public interface CategoryMapper {
     List<RequestCategoryDTO> categoriesToRequestCategoriesDtos(List<Category> categories);
 
     @InheritInverseConfiguration
+    @Mapping(target = "id", ignore = true)
     Category requestCategoryDtoToCategory(RequestCategoryDTO requestCategoryDTO);
     List<Category> requestCategoriesDtosToCategories(List<RequestCategoryDTO> requestCategoryDTOS);
 }
