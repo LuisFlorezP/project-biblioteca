@@ -2,7 +2,7 @@ package com.example.proyectbiblioteca.dto.autor;
 
 import com.example.proyectbiblioteca.entities.Pais;
 
-public class ResponseAutorDTO extends AutorDTO {
+public class ResponseAuthorDTO extends AuthorDTO {
 
     private String name;
     private String lastName;

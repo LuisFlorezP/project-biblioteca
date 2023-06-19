@@ -1,6 +1,5 @@
 package com.example.proyectbiblioteca.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,7 +24,7 @@ public class Pais {
     @OneToMany(mappedBy = "nacionalidad")
     @JsonManagedReference
     @JsonIgnore
-    private List<Autor> autors;
+    private List<Author> authors;
 
     public Long getId() {
         return id;
@@ -43,11 +42,11 @@ public class Pais {
         this.nombre = nombre;
     }
 
-    public List<Autor> getAutors() {
-        return autors;
+    public List<Author> getAuthors() {
+        return authors;
     }
 
-    public void setAutors(List<Autor> autors) {
-        this.autors = autors;
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 }

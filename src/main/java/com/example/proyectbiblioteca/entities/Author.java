@@ -1,7 +1,6 @@
 package com.example.proyectbiblioteca.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,8 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "autor_entity")
-public class Autor {
+@Table(name = "author_entity")
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

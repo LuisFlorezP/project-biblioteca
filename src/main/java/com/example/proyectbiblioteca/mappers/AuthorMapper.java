@@ -1,8 +1,8 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.autor.RequestAutorDTO;
-import com.example.proyectbiblioteca.dto.autor.ResponseAutorDTO;
-import com.example.proyectbiblioteca.entities.Autor;
+import com.example.proyectbiblioteca.dto.autor.RequestAuthorDTO;
+import com.example.proyectbiblioteca.dto.autor.ResponseAuthorDTO;
+import com.example.proyectbiblioteca.entities.Author;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,20 +19,20 @@ public interface AuthorMapper {
             @Mapping(source = "pseudonimo", target = "pseudonym"),
             @Mapping(source = "nacionalidad", target = "nationality")
     })
-    ResponseAutorDTO toAuthor(Autor autor);
-    List<ResponseAutorDTO> toAuthors(List<Autor> autors);
+    ResponseAuthorDTO authorToResponseAuthorDto(Author author);
+    List<ResponseAuthorDTO> authorsToResponsesAuthorsDtos(List<Author> authors);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Autor toAutor(ResponseAutorDTO responseAutorDTO);
-    List<Autor> toAutors(List<ResponseAutorDTO> responseAutorDTOS);
+    Author responseAuthorDtoToAuthor(ResponseAuthorDTO responseAuthorDTO);
+    List<Author> responsesAuthorsDtosToAuthors(List<ResponseAuthorDTO> responseAuthorDTOS);
 
     @Mapping(source = "nacionalidad.id", target = "idNacionalidad")
-    RequestAutorDTO toDataAuthor(Autor autor);
-    List<RequestAutorDTO> toDataAuthors(List<Autor> autors);
+    RequestAuthorDTO authorToRequestAuthorDto(Author author);
+    List<RequestAuthorDTO> authorsToRequestsAuthorsDtos(List<Author> authors);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Autor toAutorData(RequestAutorDTO requestAutorDTO);
-    List<Autor> toAutorsData(List<RequestAutorDTO> requestAutorDTOS);
+    Author requestAuthorDtoToAuthor(RequestAuthorDTO requestAuthorDTO);
+    List<Author> requestsAuthorsDtosToAuthors(List<RequestAuthorDTO> requestAuthorDTOS);
 }

@@ -1,10 +1,10 @@
 package com.example.proyectbiblioteca.dto.autor;
 
-public class ErrorAutorDTO extends AutorDTO {
+public class ErrorAuthorDTO extends AuthorDTO {
 
     private String error;
 
-    public ErrorAutorDTO(String error) {
+    public ErrorAuthorDTO(String error) {
         this.error = error;
     }
 
