@@ -1,13 +1,12 @@
 package com.example.proyectbiblioteca.repositories;
 
-import com.example.proyectbiblioteca.entities.Categoria;
+import com.example.proyectbiblioteca.entities.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    Optional<Categoria> findByNombre(String nombre);
+    Optional<Category> findByNombre(String nombre);
 }

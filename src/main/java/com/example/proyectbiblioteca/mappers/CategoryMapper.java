@@ -1,12 +1,11 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.categoria.ResponseCategoriaDTO;
-import com.example.proyectbiblioteca.entities.Categoria;
+import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
+import com.example.proyectbiblioteca.entities.Category;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -16,11 +15,11 @@ public interface CategoryMapper {
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description")
     })
-    ResponseCategoriaDTO toCategory(Categoria categoria);
-    List<ResponseCategoriaDTO> toCategories(List<Categoria> categorias);
+    ResponseCategoryDTO categoryToResponseCategoryDto(Category category);
+    List<ResponseCategoryDTO> categoriesToResponseCategoriesDtos(List<Category> categories);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", ignore = true)
-    Categoria toCategoria(ResponseCategoriaDTO responseCategoriaDTO);
-    List<Categoria> toCategorias(List<ResponseCategoriaDTO> categories);
+    Category responseCategoryDtoToCategory(ResponseCategoryDTO responseCategoryDTO);
+    List<Category> responseCategoriesDtoToCategories(List<ResponseCategoryDTO> responseCategoryDTOS);
 }

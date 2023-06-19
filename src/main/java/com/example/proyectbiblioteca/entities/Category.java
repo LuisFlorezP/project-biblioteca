@@ -7,8 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "categoria_entity")
-public class Categoria {
+@Table(name = "category_entity")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

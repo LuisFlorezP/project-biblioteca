@@ -1,10 +1,10 @@
 package com.example.proyectbiblioteca.dto.categoria;
 
-public class ErrorCategoriaDTO extends CategoriaDTO {
+public class ErrorCategoryDTO extends CategoryDTO {
 
     private String error;
 
-    public ErrorCategoriaDTO(String error) {
+    public ErrorCategoryDTO(String error) {
         this.error = error;
     }
 

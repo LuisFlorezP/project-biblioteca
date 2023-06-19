@@ -1,4 +1,4 @@
 package com.example.proyectbiblioteca.dto.categoria;
 
-public class CategoriaDTO {
+public class CategoryDTO {
 }

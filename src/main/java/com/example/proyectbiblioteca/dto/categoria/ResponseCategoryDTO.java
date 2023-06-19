@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.dto.categoria;
 
-public class ResponseCategoriaDTO extends CategoriaDTO {
+public class ResponseCategoryDTO extends CategoryDTO {
 
     private String name;
     private String description;
