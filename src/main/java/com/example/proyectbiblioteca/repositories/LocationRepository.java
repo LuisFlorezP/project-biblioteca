@@ -1,9 +1,9 @@
 package com.example.proyectbiblioteca.repositories;
 
-import com.example.proyectbiblioteca.entities.Ubicacion;
+import com.example.proyectbiblioteca.entities.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UbicacionRepository extends JpaRepository<Ubicacion, Long> {
+public interface LocationRepository extends JpaRepository<Location, Long> {
 }

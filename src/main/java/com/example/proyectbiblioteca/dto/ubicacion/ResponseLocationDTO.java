@@ -1,6 +1,6 @@
 package com.example.proyectbiblioteca.dto.ubicacion;
 
-public class ResponseUbicacionDTO extends UbicacionDTO {
+public class ResponseLocationDTO extends LocationDTO {
 
     private String floor;
     private String lounge;

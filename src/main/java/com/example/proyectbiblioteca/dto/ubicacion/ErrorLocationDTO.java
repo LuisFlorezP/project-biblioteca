@@ -1,10 +1,10 @@
 package com.example.proyectbiblioteca.dto.ubicacion;
 
-public class ErrorUbicacionDTO extends UbicacionDTO {
+public class ErrorLocationDTO extends LocationDTO {
 
     private String error;
 
-    public ErrorUbicacionDTO(String error) {
+    public ErrorLocationDTO(String error) {
         this.error = error;
     }
 
