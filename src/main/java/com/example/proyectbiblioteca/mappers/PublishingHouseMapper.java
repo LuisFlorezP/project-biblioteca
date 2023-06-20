@@ -1,7 +1,7 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.editorial.RequestPublishingHouseDTO;
-import com.example.proyectbiblioteca.dto.editorial.ResponsePublishingHouseDTO;
+import com.example.proyectbiblioteca.dto.publishinghouse.RequestPublishingHouseDTO;
+import com.example.proyectbiblioteca.dto.publishinghouse.ResponsePublishingHouseDTO;
 import com.example.proyectbiblioteca.entities.PublishingHouse;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

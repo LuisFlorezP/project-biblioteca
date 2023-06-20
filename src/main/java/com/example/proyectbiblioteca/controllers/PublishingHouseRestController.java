@@ -1,9 +1,9 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.editorial.ErrorPublishingHouseDTO;
-import com.example.proyectbiblioteca.dto.editorial.PublishingHouseDTO;
-import com.example.proyectbiblioteca.dto.editorial.RequestPublishingHouseDTO;
-import com.example.proyectbiblioteca.dto.editorial.ResponsePublishingHouseDTO;
+import com.example.proyectbiblioteca.dto.publishinghouse.ErrorPublishingHouseDTO;
+import com.example.proyectbiblioteca.dto.publishinghouse.PublishingHouseDTO;
+import com.example.proyectbiblioteca.dto.publishinghouse.RequestPublishingHouseDTO;
+import com.example.proyectbiblioteca.dto.publishinghouse.ResponsePublishingHouseDTO;
 import com.example.proyectbiblioteca.mappers.PublishingHouseMapper;
 import com.example.proyectbiblioteca.services.PublishingHouseService;
 import io.swagger.v3.oas.annotations.Operation;

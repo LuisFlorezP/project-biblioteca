@@ -1,4 +1,4 @@
-package com.example.proyectbiblioteca.dto.editorial;
+package com.example.proyectbiblioteca.dto.publishinghouse;
 
 public class ErrorPublishingHouseDTO extends PublishingHouseDTO {
 
