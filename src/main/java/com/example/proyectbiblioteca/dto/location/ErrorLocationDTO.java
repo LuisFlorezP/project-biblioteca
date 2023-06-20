@@ -1,4 +1,4 @@
-package com.example.proyectbiblioteca.dto.ubicacion;
+package com.example.proyectbiblioteca.dto.location;
 
 public class ErrorLocationDTO extends LocationDTO {
 

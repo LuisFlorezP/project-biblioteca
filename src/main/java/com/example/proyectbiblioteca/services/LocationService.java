@@ -1,7 +1,7 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.ubicacion.RequestLocationDTO;
-import com.example.proyectbiblioteca.dto.ubicacion.ResponseLocationDTO;
+import com.example.proyectbiblioteca.dto.location.RequestLocationDTO;
+import com.example.proyectbiblioteca.dto.location.ResponseLocationDTO;
 import com.example.proyectbiblioteca.entities.Location;
 import com.example.proyectbiblioteca.mappers.LocationMapper;
 import com.example.proyectbiblioteca.repositories.LocationRepository;

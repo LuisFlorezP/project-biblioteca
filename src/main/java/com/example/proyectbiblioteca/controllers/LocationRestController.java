@@ -1,9 +1,9 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.ubicacion.ErrorLocationDTO;
-import com.example.proyectbiblioteca.dto.ubicacion.LocationDTO;
-import com.example.proyectbiblioteca.dto.ubicacion.RequestLocationDTO;
-import com.example.proyectbiblioteca.dto.ubicacion.ResponseLocationDTO;
+import com.example.proyectbiblioteca.dto.location.ErrorLocationDTO;
+import com.example.proyectbiblioteca.dto.location.LocationDTO;
+import com.example.proyectbiblioteca.dto.location.RequestLocationDTO;
+import com.example.proyectbiblioteca.dto.location.ResponseLocationDTO;
 import com.example.proyectbiblioteca.mappers.LocationMapper;
 import com.example.proyectbiblioteca.services.LocationService;
 import io.swagger.v3.oas.annotations.Operation;
