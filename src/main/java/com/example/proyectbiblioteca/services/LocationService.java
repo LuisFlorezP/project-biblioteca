@@ -69,7 +69,7 @@ public class LocationService extends LocationValidations {
                 data.setPiso(location.getPiso());
                 data.setSalon(location.getSalon());
                 data.setEstante(location.getEstante());
-                return mapper.locationToRequestLocationDto(data);
+                return mapper.locationToRequestLocationDto(repository.save(data));
             }
             throw new Exception("The Location entity record was not found.");
         } catch (Exception e) {

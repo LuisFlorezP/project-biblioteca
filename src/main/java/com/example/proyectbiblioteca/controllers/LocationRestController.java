@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/locations")
+@Tag(name = "Services of Locations", description = "Methods to be able to create, read, update and delete (CRUD) services corresponding to the Location entity.")
 public class LocationRestController {
 
     @Autowired
@@ -98,7 +100,7 @@ public class LocationRestController {
         try {
             return new ResponseEntity<>(service.saveLocation(mapper.requestLocationDtoToLocation(location)), HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ErrorLocationDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorLocationDTO("The Location entered has not been created and saved: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -123,7 +125,7 @@ public class LocationRestController {
         try {
             return new ResponseEntity<>(service.updateLocation(mapper.requestLocationDtoToLocation(location), id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ErrorLocationDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorLocationDTO("The Location entered has not been updated and saved: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
