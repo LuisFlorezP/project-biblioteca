@@ -1,4 +1,4 @@
-package com.example.proyectbiblioteca.dto.autor;
+package com.example.proyectbiblioteca.dto.author;
 
 public class ErrorAuthorDTO extends AuthorDTO {
 

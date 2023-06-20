@@ -1,7 +1,7 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.autor.RequestAuthorDTO;
-import com.example.proyectbiblioteca.dto.autor.ResponseAuthorDTO;
+import com.example.proyectbiblioteca.dto.author.RequestAuthorDTO;
+import com.example.proyectbiblioteca.dto.author.ResponseAuthorDTO;
 import com.example.proyectbiblioteca.entities.Author;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

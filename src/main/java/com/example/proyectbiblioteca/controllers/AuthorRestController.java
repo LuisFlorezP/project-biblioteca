@@ -1,8 +1,8 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.autor.*;
-import com.example.proyectbiblioteca.dto.autor.AuthorDTO;
-import com.example.proyectbiblioteca.dto.autor.ResponseAuthorDTO;
+import com.example.proyectbiblioteca.dto.author.*;
+import com.example.proyectbiblioteca.dto.author.AuthorDTO;
+import com.example.proyectbiblioteca.dto.author.ResponseAuthorDTO;
 import com.example.proyectbiblioteca.mappers.AuthorMapper;
 import com.example.proyectbiblioteca.services.AuthorService;
 import io.swagger.v3.oas.annotations.Operation;

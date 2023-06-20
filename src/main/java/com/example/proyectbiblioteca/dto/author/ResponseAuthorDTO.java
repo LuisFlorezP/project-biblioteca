@@ -1,4 +1,4 @@
-package com.example.proyectbiblioteca.dto.autor;
+package com.example.proyectbiblioteca.dto.author;
 
 import com.example.proyectbiblioteca.entities.Pais;
 
