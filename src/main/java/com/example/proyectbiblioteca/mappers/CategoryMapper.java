@@ -1,7 +1,7 @@
 package com.example.proyectbiblioteca.mappers;
 
-import com.example.proyectbiblioteca.dto.categoria.RequestCategoryDTO;
-import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
+import com.example.proyectbiblioteca.dto.category.RequestCategoryDTO;
+import com.example.proyectbiblioteca.dto.category.ResponseCategoryDTO;
 import com.example.proyectbiblioteca.entities.Category;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

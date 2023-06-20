@@ -1,7 +1,7 @@
 package com.example.proyectbiblioteca.services;
 
-import com.example.proyectbiblioteca.dto.categoria.RequestCategoryDTO;
-import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
+import com.example.proyectbiblioteca.dto.category.RequestCategoryDTO;
+import com.example.proyectbiblioteca.dto.category.ResponseCategoryDTO;
 import com.example.proyectbiblioteca.entities.Category;
 import com.example.proyectbiblioteca.mappers.CategoryMapper;
 import com.example.proyectbiblioteca.repositories.CategoryRepository;

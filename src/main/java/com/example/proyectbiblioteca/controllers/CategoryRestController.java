@@ -1,9 +1,9 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.categoria.CategoryDTO;
-import com.example.proyectbiblioteca.dto.categoria.ErrorCategoryDTO;
-import com.example.proyectbiblioteca.dto.categoria.RequestCategoryDTO;
-import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
+import com.example.proyectbiblioteca.dto.category.CategoryDTO;
+import com.example.proyectbiblioteca.dto.category.ErrorCategoryDTO;
+import com.example.proyectbiblioteca.dto.category.RequestCategoryDTO;
+import com.example.proyectbiblioteca.dto.category.ResponseCategoryDTO;
 import com.example.proyectbiblioteca.mappers.CategoryMapper;
 import com.example.proyectbiblioteca.services.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
