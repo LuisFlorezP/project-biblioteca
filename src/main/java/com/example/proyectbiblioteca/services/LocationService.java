@@ -1,5 +1,6 @@
 package com.example.proyectbiblioteca.services;
 
+import com.example.proyectbiblioteca.dto.ubicacion.RequestLocationDTO;
 import com.example.proyectbiblioteca.dto.ubicacion.ResponseLocationDTO;
 import com.example.proyectbiblioteca.entities.Location;
 import com.example.proyectbiblioteca.mappers.LocationMapper;
@@ -38,7 +39,7 @@ public class LocationService extends LocationValidations {
         }
     }
 
-    public ResponseLocationDTO saveLocation(Location location) throws Exception {
+    public RequestLocationDTO saveLocation(Location location) throws Exception {
         try {
             if (attributePresent(location.getPiso())) {
                 throw new Exception("The location must register floor.");
@@ -47,13 +48,13 @@ public class LocationService extends LocationValidations {
             } else if (attributePresent(location.getEstante())) {
                 throw new Exception("The location must register shelf.");
             }
-            return mapper.locationToResponseLocationDto(repository.save(location));
+            return mapper.locationToRequestLocationDto(repository.save(location));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    public ResponseLocationDTO updateLocation(Location location, Long id) throws Exception {
+    public RequestLocationDTO updateLocation(Location location, Long id) throws Exception {
         try {
             Optional<Location> search = repository.findById(id);
             if (locationPresent(search)) {
@@ -68,7 +69,7 @@ public class LocationService extends LocationValidations {
                 data.setPiso(location.getPiso());
                 data.setSalon(location.getSalon());
                 data.setEstante(location.getEstante());
-                return mapper.locationToResponseLocationDto(data);
+                return mapper.locationToRequestLocationDto(data);
             }
             throw new Exception("The Location entity record was not found.");
         } catch (Exception e) {

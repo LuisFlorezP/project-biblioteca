@@ -1,11 +1,10 @@
 package com.example.proyectbiblioteca.controllers;
 
-import com.example.proyectbiblioteca.dto.categoria.RequestCategoryDTO;
-import com.example.proyectbiblioteca.dto.categoria.ResponseCategoryDTO;
 import com.example.proyectbiblioteca.dto.ubicacion.ErrorLocationDTO;
 import com.example.proyectbiblioteca.dto.ubicacion.LocationDTO;
+import com.example.proyectbiblioteca.dto.ubicacion.RequestLocationDTO;
 import com.example.proyectbiblioteca.dto.ubicacion.ResponseLocationDTO;
-import com.example.proyectbiblioteca.entities.Location;
+import com.example.proyectbiblioteca.mappers.LocationMapper;
 import com.example.proyectbiblioteca.services.LocationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +24,8 @@ public class LocationRestController {
 
     @Autowired
     private LocationService service;
+    @Autowired
+    private LocationMapper mapper;
 
     @Operation(summary = "Read all locations stored in database.")
     @ApiResponses(value = {
@@ -84,7 +85,7 @@ public class LocationRestController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ResponseLocationDTO.class))
+                                    schema = @Schema(implementation = RequestLocationDTO.class))
                     }
             ),
             @ApiResponse(
@@ -93,9 +94,9 @@ public class LocationRestController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<LocationDTO> saveLocation(@RequestBody Location location) {
+    public ResponseEntity<LocationDTO> saveLocation(@RequestBody RequestLocationDTO location) {
         try {
-            return new ResponseEntity<>(service.saveLocation(location), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.saveLocation(mapper.requestLocationDtoToLocation(location)), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorLocationDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -109,7 +110,7 @@ public class LocationRestController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ResponseLocationDTO.class))
+                                    schema = @Schema(implementation = RequestLocationDTO.class))
                     }
             ),
             @ApiResponse(
@@ -118,9 +119,9 @@ public class LocationRestController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<LocationDTO> updateLocation(@RequestBody Location location, @PathVariable Long id) {
+    public ResponseEntity<LocationDTO> updateLocation(@RequestBody RequestLocationDTO location, @PathVariable Long id) {
         try {
-            return new ResponseEntity<>(service.updateLocation(location, id), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(service.updateLocation(mapper.requestLocationDtoToLocation(location), id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorLocationDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
